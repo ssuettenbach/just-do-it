@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import type { Task, TaskInput } from '../../domain/types';
 import { validateTaskInput } from '../../domain/taskFactory';
 import { normalizeLabels } from '../../domain/labels';
-import { Button } from '../Button';
-import { LabelInput } from './LabelInput';
-import { formatDate } from '../format';
+import {LabelInput} from "./LabelInput";
+import {Button} from "../Button";
 
 const ESTIMATE_PRESETS = [5, 15, 30, 45];
 const DEFAULT_ESTIMATE = ESTIMATE_PRESETS[0];
@@ -24,7 +23,6 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
   const estimateId = useId();
   const dueDateId = useId();
   const notesId = useId();
-  const labelsId = useId();
 
   const [input, setInput] = useState<TaskInput>({
     title: '',

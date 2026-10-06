@@ -1,6 +1,6 @@
 import { useState, useRef, useId, KeyboardEvent, ChangeEvent } from 'react';
-import { LabelChips } from '../LabelChips';
 import { normalizeLabels } from '../../domain/labels';
+import { LabelChips } from "../LabelChips";
 
 interface LabelInputProps {
   labels: string[];

@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { Task } from '../../domain/types';
-import { TaskMeta } from '../TaskMeta';
-import { ConfirmDialog } from '../ConfirmDialog';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
+import { useTaskActions } from '../../hooks';
 import checkIcon from '../../images/check.svg';
 import editIcon from '../../images/edit.svg';
 import trashIcon from '../../images/trash.svg';
-import { useTaskActions } from '../../hooks/useTaskActions';
+import {TaskMeta} from "../TaskMeta";
+import {Button} from "../Button";
+import {Icon} from "../Icon";
+import {ConfirmDialog} from "../ConfirmDialog";
 
 interface OpenTaskItemProps {
   task: Task;

@@ -9,7 +9,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, actions, backTo }: PageHeaderProps) {
   return (
-    <header className="flex items-center justify-between mb-6">
+    <header className="flex items-center gap-6 mb-6">
        {backTo ? (
           <Link
             to={backTo}
@@ -34,7 +34,7 @@ export function PageHeader({ title, actions, backTo }: PageHeaderProps) {
         <div aria-hidden="true" className="w-6" />
       )}
        <h1 className="text-xl font-semibold text-fg truncate">{title}</h1>
-      {actions && <div className="flex gap-2">{actions}</div>}
+      {actions && <div className="absolute top-4 right-4">{actions}</div>}
     </header>
   );
 }

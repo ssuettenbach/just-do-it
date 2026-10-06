@@ -13,3 +13,12 @@ export {
   OpenTaskContent,
   HistoryTaskContent,
 } from './tasks';
+export {
+  ThemeSection,
+  DataInfoSection,
+  ExportSection,
+  ImportSection,
+  readFileText,
+} from './settings';
+export { PickButton, PickedTaskCard } from './dashboard';
+export { AddTaskFab, BottomNav, Layout } from './layout';

@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { PageHeader } from '../components/PageHeader';
-import { TaskForm } from '../components/tasks/TaskForm';
-import { ConfirmDialog } from '../components/ConfirmDialog';
-import { Button } from '../components/Button';
-import { useTask } from '../hooks/useTask';
-import { useKnownLabels } from '../hooks/useKnownLabels';
-import { useTaskActions } from '../hooks/useTaskActions';
-import { formatDateTime } from '../components/format';
+import { PageHeader, ConfirmDialog, Button, formatDateTime } from '../components';
+import { useTask, useKnownLabels, useTaskActions } from '../hooks';
 import type { TaskInput } from '../domain/types';
+import {TaskForm} from "../components/tasks";
 
 type TaskFormPageProps = {
   mode: 'create' | 'edit';
