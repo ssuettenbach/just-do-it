@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <title>JustDoIt - Datenbank befüllen</title>
+  <script type="module">
+    import { seedDatabase, clearDatabase } from './src/db/seedTasks.ts';
+    
+    window.seedDatabase = seedDatabase;
+    window.clearDatabase = clearDatabase;
+  </script>
+</head>
+<body>
+  <h1>JustDoIt Datenbank befüllen</h1>
+  <button onclick="seedDatabase()">Datenbank befüllen</button>
+  <button onclick="clearDatabase()">Datenbank leeren</button>
+  <p id="status"></p>
+  
+  <script>
+    window.seedDatabase = async function() {
+      try {
+        await seedDatabase();
+        document.getElementById('status').textContent = 'Datenbank erfolgreich befüllt!';
+      } catch (error) {
+        document.getElementById('status').textContent = 'Fehler: ' + error.message;
+      }
+    };
+    
+    window.clearDatabase = async function() {
+      try {
+        await clearDatabase();
+        document.getElementById('status').textContent = 'Datenbank erfolgreich geleert!';
+      } catch (error) {
+        document.getElementById('status').textContent = 'Fehler: ' + error.message;
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    min-height: 100dvh;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100;
+    min-height: 100dvh;
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 3px solid #a5b4fc;
+    outline-offset: 2px;
+  }
+}
+
+@utility safe-inset {
+  padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right))
+    max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));
+}

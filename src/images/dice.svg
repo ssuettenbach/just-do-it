@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
+    <defs>
+
+        <!-- Oberfläche: Sehr helles Blau (#d9f4ff wie gewünscht) -->
+        <linearGradient id="gTop" x1="20%" y1="0%" x2="80%" y2="100%">
+            <stop offset="0%"   stop-color="#f0fbff"/>
+            <stop offset="100%" stop-color="#d9f4ff"/>
+        </linearGradient>
+
+        <!-- Linke Fläche: Mittleres Blau -->
+        <linearGradient id="gLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#9ad4ec"/>
+            <stop offset="100%" stop-color="#74bce0"/>
+        </linearGradient>
+
+        <!-- Rechte Fläche: Dunkleres Blau (Schatten) -->
+        <linearGradient id="gRight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#56a4c8"/>
+            <stop offset="100%" stop-color="#3c90b8"/>
+        </linearGradient>
+
+    </defs>
+
+    <!-- Schatten unter dem Würfel -->
+    <ellipse cx="50" cy="91" rx="24" ry="5" fill="#6aacc8" opacity="0.35"/>
+
+    <!-- ── Flächen-Füllungen ── -->
+    <!-- Oben:   A(50,12)  B(83,29)  G(50,50)  F(17,29) -->
+    <polygon points="50,12 83,29 50,50 17,29" fill="url(#gTop)"/>
+    <!-- Links:  F(17,29)  G(50,50)  D(50,86)  E(17,68) -->
+    <polygon points="17,29 50,50 50,86 17,68" fill="url(#gLeft)"/>
+    <!-- Rechts: B(83,29)  C(83,68)  D(50,86)  G(50,50) -->
+    <polygon points="83,29 83,68 50,86 50,50" fill="url(#gRight)"/>
+
+    <!-- Glanz-Highlight auf Deckfläche -->
+    <ellipse cx="34" cy="25" rx="13" ry="5"
+             fill="white" opacity="0.25" transform="rotate(-27,34,25)"/>
+
+    <!-- ── Augenpunkte ── -->
+
+    <!-- Deckfläche: 1 Punkt (isometrische Ellipse) -->
+    <ellipse cx="50" cy="30" rx="4.8" ry="3" fill="#162e52"/>
+
+    <!-- Linke Fläche: 5 Punkte (Würfelmuster) -->
+    <circle cx="25"  cy="42.5" r="2.8" fill="#162e52"/>
+    <circle cx="42"  cy="54"   r="2.8" fill="#162e52"/>
+    <circle cx="32"  cy="58.5" r="2.7" fill="#162e52"/>
+    <circle cx="25"  cy="65"   r="2.8" fill="#162e52"/>
+    <circle cx="42"  cy="74" r="2.8" fill="#162e52"/>
+
+    <!-- Rechte Fläche: 6 Punkte (2×3 Würfelmuster) -->
+    <circle cx="73"  cy="45"   r="2.5"   fill="#162e52"/>
+    <circle cx="73"  cy="55"   r="2.5"   fill="#162e52"/>
+    <circle cx="73.5"  cy="65"   r="2.5"   fill="#162e52"/>
+    <circle cx="60"  cy="52"   r="2.5"   fill="#162e52"/>
+    <circle cx="60"  cy="62"   r="2.5"   fill="#162e52"/>
+    <circle cx="60"  cy="72"   r="2.5"   fill="#162e52"/>
+
+    <!-- ── Innere Kanten vom Mittelpunkt G(50,50) ── -->
+    <line x1="50" y1="50" x2="17" y2="29" stroke="#162e52" stroke-width="4"   stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="83" y2="29" stroke="#162e52" stroke-width="4"   stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="50" y2="86" stroke="#162e52" stroke-width="4"   stroke-linecap="round"/>
+
+    <!-- ── Äußerer Umriss: gerundetes Hexagon ── -->
+    <path d="M 42.9,15.7  Q 50,12    57.1,15.7
+           L 75.9,25.3  Q 83,29    83,37
+           L 83,60      Q 83,68    76,71.8
+           L 57,82.2    Q 50,86    43,82.2
+           L 24,71.8    Q 17,68    17,60
+           L 17,37      Q 17,29    24.1,25.3 Z"
+          fill="none"
+          stroke="#162e52"
+          stroke-width="5.5"
+          stroke-linejoin="round"/>
+
+</svg>

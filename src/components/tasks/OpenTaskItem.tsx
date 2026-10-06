@@ -1,0 +1,84 @@
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import type { Task } from '../../domain/types';
+import { TaskMeta } from '../TaskMeta';
+import { ConfirmDialog } from '../ConfirmDialog';
+import { Button } from '../Button';
+import { useTaskActions } from '../../hooks/useTaskActions';
+
+interface OpenTaskItemProps {
+  task: Task;
+  onActionError?: (error: string) => void;
+}
+
+export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const { completeTask, deleteTask } = useTaskActions();
+
+  const handleComplete = async () => {
+    try {
+      await completeTask(task.id);
+    } catch (error) {
+      onActionError?.('Aufgabe konnte nicht abgeschlossen werden. Bitte erneut versuchen.');
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteTask(task.id);
+    } catch (error) {
+      onActionError?.('Aufgabe konnte nicht gelöscht werden. Bitte erneut versuchen.');
+    }
+  };
+
+  return (
+    <li className="bg-slate-800 rounded-lg p-4 border border-slate-700">
+      <div className="flex flex-col gap-2">
+        <h3 className="text-lg font-medium text-slate-100 truncate">{task.title}</h3>
+        <TaskMeta task={task} />
+        {task.notes && <p className="text-sm text-slate-400">{task.notes}</p>}
+        <div className="flex gap-2 mt-2">
+          <Button
+            variant="primary"
+            size="md"
+            onClick={handleComplete}
+            aria-label={`${task.title} erledigen`}
+          >
+            Erledigt
+          </Button>
+          <Link to={`/tasks/${task.id}`} className="flex-1">
+            <Button
+              variant="secondary"
+              size="md"
+              className="w-full"
+              aria-label={`${task.title} bearbeiten`}
+            >
+              Bearbeiten
+            </Button>
+          </Link>
+          <Button
+            variant="danger"
+            size="md"
+            onClick={() => setShowDeleteDialog(true)}
+            aria-label={`${task.title} löschen`}
+          >
+            Löschen
+          </Button>
+        </div>
+      </div>
+
+      <ConfirmDialog
+        open={showDeleteDialog}
+        title="Aufgabe löschen?"
+        message={`„${task.title}“ wird dauerhaft gelöscht. Das kann nicht rückgängig gemacht werden.`}
+        confirmLabel="Löschen"
+        destructive
+        onConfirm={() => {
+          setShowDeleteDialog(false);
+          handleDelete();
+        }}
+        onCancel={() => setShowDeleteDialog(false)}
+      />
+    </li>
+  );
+}
