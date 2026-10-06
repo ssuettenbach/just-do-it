@@ -3,6 +3,9 @@ import type { Task } from '../../domain/types';
 import { TaskMeta } from '../TaskMeta';
 import { ConfirmDialog } from '../ConfirmDialog';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
+import undoIcon from '../../images/undo.svg';
+import trashIcon from '../../images/trash.svg';
 import { useTaskActions } from '../../hooks';
 import { formatDateTime } from '../format';
 
@@ -42,13 +45,14 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
         </div>
         <TaskMeta task={task} />
         {task.notes && <p className="text-sm text-fg-muted">{task.notes}</p>}
-        <div className="flex gap-2 mt-2">
+        <div className="flex justify-between gap-2 mt-2">
           <Button
             variant="secondary"
             size="md"
             onClick={handleReopen}
             aria-label={`${task.title} wieder öffnen`}
           >
+            <Icon src={undoIcon} />
             Wieder öffnen
           </Button>
           <Button
@@ -57,6 +61,7 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
             onClick={() => setShowDeleteDialog(true)}
             aria-label={`${task.title} löschen`}
           >
+            <Icon src={trashIcon} />
             Löschen
           </Button>
         </div>

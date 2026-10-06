@@ -1,4 +1,6 @@
 import { Button } from '../Button';
+import { Icon } from '../Icon';
+import resetIcon from '../../images/reset.svg';
 import { EmptyState } from '../EmptyState';
 import { HistoryTaskItem } from './HistoryTaskItem';
 import type { Task } from '../../domain/types';

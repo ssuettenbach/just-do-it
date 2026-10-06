@@ -4,6 +4,10 @@ import type { Task } from '../../domain/types';
 import { TaskMeta } from '../TaskMeta';
 import { ConfirmDialog } from '../ConfirmDialog';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
+import checkIcon from '../../images/check.svg';
+import editIcon from '../../images/edit.svg';
+import trashIcon from '../../images/trash.svg';
 import { useTaskActions } from '../../hooks/useTaskActions';
 
 interface OpenTaskItemProps {
@@ -44,6 +48,7 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
             onClick={handleComplete}
             aria-label={`${task.title} erledigen`}
           >
+            <Icon src={checkIcon} />
             Erledigt
           </Button>
           <Link to={`/tasks/${task.id}`} className="flex-1">
@@ -53,6 +58,7 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
               className="w-full"
               aria-label={`${task.title} bearbeiten`}
             >
+              <Icon src={editIcon} />
               Bearbeiten
             </Button>
           </Link>
@@ -62,6 +68,7 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
             onClick={() => setShowDeleteDialog(true)}
             aria-label={`${task.title} löschen`}
           >
+            <Icon src={trashIcon} />
             Löschen
           </Button>
         </div>

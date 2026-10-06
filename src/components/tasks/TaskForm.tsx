@@ -37,7 +37,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
   const [errors, setErrors] = useState<Partial<Record<'title' | 'estimateMinutes' | 'dueDate', string>>>({});
 
   const titleRef = useRef<HTMLInputElement>(null);
-  const estimateRef = useRef<HTMLInputElement>(null);
+  const estimateRef = useRef<HTMLSelectElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {

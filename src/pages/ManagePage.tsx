@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import settingsIcon from '../images/settings.svg';
 import {
   PageHeader,
+  TaskSearchInput,
   OpenFilterPanel,
   HistoryFilterPanel,
   OpenTaskContent,
@@ -91,6 +92,20 @@ export default function ManagePage({ tab }: ManagePageProps) {
           Verlauf
         </Link>
       </nav>
+
+      {tab === 'open' ? (
+        <TaskSearchInput
+          id="open-text"
+          value={openFilters.text}
+          onChange={(text) => handleOpenFilterChange({ text })}
+        />
+      ) : (
+        <TaskSearchInput
+          id="history-text"
+          value={historyFilters.text}
+          onChange={(text) => handleHistoryFilterChange({ text })}
+        />
+      )}
 
       <details className="mb-6">
         <summary className="cursor-pointer text-sm font-medium text-fg-soft hover:text-fg py-2">

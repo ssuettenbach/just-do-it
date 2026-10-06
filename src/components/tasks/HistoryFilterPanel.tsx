@@ -1,4 +1,6 @@
 import { Button } from '../Button';
+import { Icon } from '../Icon';
+import resetIcon from '../../images/reset.svg';
 import type { HistoryFilters } from '../../domain/types';
 
 interface HistoryFilterPanelProps {
@@ -12,20 +14,6 @@ interface HistoryFilterPanelProps {
 export function HistoryFilterPanel({ filters, knownLabels, onChange, onClear, hasActiveFilters }: HistoryFilterPanelProps) {
   return (
     <div className="space-y-4">
-      <div>
-        <label htmlFor="history-text" className="block text-sm font-medium text-fg-muted mb-1">
-          Suche
-        </label>
-        <input
-          id="history-text"
-          type="text"
-          value={filters.text}
-          onChange={(e) => onChange({ text: e.target.value })}
-          placeholder="Aufgaben durchsuchen..."
-          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus"
-        />
-      </div>
-
       <div>
         <label htmlFor="history-label" className="block text-sm font-medium text-fg-muted mb-1">
           Kennzeichnung
@@ -74,6 +62,7 @@ export function HistoryFilterPanel({ filters, knownLabels, onChange, onClear, ha
 
       {hasActiveFilters && (
         <Button variant="ghost" onClick={onClear} className="w-full">
+          <Icon src={resetIcon} />
           Filter zurücksetzen
         </Button>
       )}
