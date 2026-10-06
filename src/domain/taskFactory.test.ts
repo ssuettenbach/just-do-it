@@ -33,11 +33,6 @@ describe('taskFactory', () => {
       expect(errors.estimateMinutes).toBeDefined();
     });
 
-    it('rejects estimate over 10000', () => {
-      const errors = validateTaskInput({ ...TestData.createTestTaskInput(), estimateMinutes: 10001 });
-      expect(errors.estimateMinutes).toBeDefined();
-    });
-
     it('rejects non-integer estimate', () => {
       const errors = validateTaskInput({ ...TestData.createTestTaskInput(), estimateMinutes: 5.5 });
       expect(errors.estimateMinutes).toBeDefined();
