@@ -117,7 +117,7 @@ export function ImportSection({ backup }: ImportSectionProps) {
             />
           </label>
 
-          {importState.type === 'invalid' && importState.validationResult && (
+          {importState.type === 'invalid' && importState.validationResult && !importState.validationResult.ok && (
             <div role="alert" className="text-red-400 text-sm space-y-1">
               <p>Diese Datei kann nicht importiert werden.</p>
               <ul className="list-disc list-inside">

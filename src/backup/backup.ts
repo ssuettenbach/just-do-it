@@ -41,7 +41,7 @@ function validateTaskRecord(raw: unknown, seenIds: Set<string>): string[] {
   }
 
   if (task.estimateMinutes !== null && task.estimateMinutes !== undefined) {
-    if (!Number.isInteger(task.estimateMinutes) || task.estimateMinutes < 0) {
+    if (typeof task.estimateMinutes !== 'number' || !Number.isInteger(task.estimateMinutes) || task.estimateMinutes < 0) {
       errors.push('estimateMinutes muss null oder eine nicht negative Ganzzahl sein');
     }
   } else if (task.estimateMinutes === undefined) {

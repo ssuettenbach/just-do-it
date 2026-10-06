@@ -54,8 +54,8 @@ export async function seedDatabase(): Promise<void> {
     try {
       const taskInput = {
         title: taskData.title!,
-        estimateMinutes: taskData.estimateMinutes,
-        dueDate: taskData.dueDate,
+        estimateMinutes: taskData.estimateMinutes ?? null,
+        dueDate: taskData.dueDate ?? null,
         notes: taskData.notes || '',
         labels: taskData.labels || [],
       };

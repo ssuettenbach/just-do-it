@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Button } from '../Button';
-import type { ReturnType } from '../../hooks/useBackup';
+import type { useBackup } from '../../hooks';
 
 interface ExportSectionProps {
-  backup: ReturnType<typeof import('../../hooks/useBackup').useBackup>;
+  backup: ReturnType<typeof useBackup>;
 }
 
 export function ExportSection({ backup }: ExportSectionProps) {

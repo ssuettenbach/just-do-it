@@ -16,7 +16,7 @@ describe('themeStore', () => {
     localStorage.clear();
     document.documentElement.classList.remove('dark');
     document.documentElement.style.colorScheme = '';
-    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    let metaThemeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
     if (!metaThemeColor) {
       metaThemeColor = document.createElement('meta');
       metaThemeColor.name = 'theme-color';
