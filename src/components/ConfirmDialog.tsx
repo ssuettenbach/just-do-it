@@ -71,13 +71,13 @@ export function ConfirmDialog({
         onClick={onCancel}
         aria-hidden="true"
       />
-      <div className="relative bg-slate-800 rounded-xl p-6 max-w-sm w-full shadow-xl">
-        <h2 id={titleId} className="text-xl font-semibold text-slate-100 mb-3">
-          {title}
-        </h2>
-        <div id={messageId} className="text-slate-300 mb-6">
-          {message}
-        </div>
+       <div className="relative bg-surface rounded-xl p-6 max-w-sm w-full shadow-xl">
+         <h2 id={titleId} className="text-xl font-semibold text-fg mb-3">
+           {title}
+         </h2>
+         <div id={messageId} className="text-fg-soft mb-6">
+           {message}
+         </div>
         <div className="flex gap-3 justify-end">
           <Button variant="secondary" onClick={onCancel} ref={cancelButtonRef}>
             {cancelLabel}

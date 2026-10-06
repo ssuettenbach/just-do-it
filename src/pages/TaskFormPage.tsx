@@ -76,7 +76,7 @@ export default function TaskFormPage({ mode }: TaskFormPageProps) {
     return (
       <div className="p-4 max-w-2xl mx-auto">
         <PageHeader title="Aufgabe bearbeiten" backTo="/manage" />
-        <p className="text-slate-400">Wird geladen...</p>
+        <p className="text-fg-muted">Wird geladen...</p>
       </div>
     );
   }
@@ -85,7 +85,7 @@ export default function TaskFormPage({ mode }: TaskFormPageProps) {
     return (
       <div className="p-4 max-w-2xl mx-auto">
         <PageHeader title="Aufgabe bearbeiten" backTo="/manage" />
-        <p className="text-slate-400">Aufgabe nicht gefunden</p>
+        <p className="text-fg-muted">Aufgabe nicht gefunden</p>
         <Link to="/manage" className="inline-block mt-4">
           <Button variant="secondary">Zurück zu den Aufgaben</Button>
         </Link>
@@ -99,19 +99,19 @@ export default function TaskFormPage({ mode }: TaskFormPageProps) {
     <div className="p-4 max-w-2xl mx-auto">
       <PageHeader title={title} backTo="/manage" />
 
-      {mode === 'edit' && task && task.status === 'completed' && (
-        <div className="mb-4 p-3 bg-slate-800 rounded-lg border border-slate-700">
-          <p className="text-sm text-slate-400">
+       {mode === 'edit' && task && task.status === 'completed' && (
+        <div className="mb-4 p-3 bg-surface rounded-lg border border-border">
+          <p className="text-sm text-fg-muted">
             Erledigt am {formatDateTime(task.completedAt || '')}
           </p>
         </div>
-      )}
+       )}
 
-      {error && (
-        <div role="alert" className="mb-4 p-3 bg-red-900/30 border border-red-600 rounded-lg text-red-400 text-sm">
+       {error && (
+        <div role="alert" className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-600 rounded-lg text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
-      )}
+       )}
 
       <TaskForm
         mode={mode}

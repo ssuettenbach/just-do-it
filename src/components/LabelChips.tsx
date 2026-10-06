@@ -13,18 +13,18 @@ export function LabelChips({ labels, onRemove }: LabelChipsProps) {
   return (
     <div className="flex flex-wrap gap-1">
       {labels.map((label) => (
-        <span
-          key={label}
-          className="inline-flex items-center px-2 py-0.5 rounded-full bg-slate-700 text-slate-200 text-xs font-medium"
-        >
-          {label}
-          {onRemove && (
-            <button
-              type="button"
-              onClick={() => onRemove(label)}
-              aria-label={`Kennzeichnung ${label} entfernen`}
-              className="ml-1.5 text-slate-400 hover:text-slate-200 focus:outline-none"
-            >
+         <span
+           key={label}
+           className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-muted text-fg text-xs font-medium"
+         >
+           {label}
+           {onRemove && (
+             <button
+               type="button"
+               onClick={() => onRemove(label)}
+               aria-label={`Kennzeichnung ${label} entfernen`}
+               className="ml-1.5 text-fg-muted hover:text-fg-soft focus:outline-none"
+             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

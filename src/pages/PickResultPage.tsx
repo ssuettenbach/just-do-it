@@ -51,16 +51,16 @@ export default function PickResultPage() {
   }
 
   if (isLoading) {
-    return <p role="status" className="text-slate-400">Wird geladen...</p>;
+    return <p role="status" className="text-fg-muted">Wird geladen...</p>;
   }
 
   if (candidates.length === 0) {
     return (
       <div className="space-y-4">
-        <p className="text-slate-300">Aktuell keine passenden Aufgaben.</p>
+        <p className="text-fg-soft">Aktuell keine passenden Aufgaben.</p>
         <Link
           to="/"
-          className="text-indigo-400 hover:text-indigo-300 transition-colors inline-block"
+          className="text-accent-text hover:text-accent-text-hover transition-colors inline-block"
         >
           Zurück zum Dashboard
         </Link>
@@ -69,7 +69,7 @@ export default function PickResultPage() {
   }
 
   if (!pickedTask) {
-    return <p role="status" className="text-slate-400">Ausgewählte Aufgabe wird geladen...</p>;
+    return <p role="status" className="text-fg-muted">Ausgewählte Aufgabe wird geladen...</p>;
   }
 
   const handleComplete = async () => {
@@ -97,7 +97,7 @@ export default function PickResultPage() {
   return (
     <div className="space-y-6">
       {error && (
-        <div role="alert" className="text-red-400 text-sm">
+        <div role="alert" className="text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
       )}
@@ -123,14 +123,14 @@ export default function PickResultPage() {
               Andere wählen
             </Button>
             {hasOnlyOneCandidate && (
-              <span id="only-task-hint" className="text-sm text-slate-400">
+              <span id="only-task-hint" className="text-sm text-fg-muted">
                 Dies ist die einzige passende Aufgabe.
               </span>
             )}
-            <Link
-              to={`/tasks/${pickedTask.id}`}
-              className="min-h-11 inline-flex items-center justify-center px-4 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 hover:bg-slate-800 text-slate-300 hover:text-slate-200"
-            >
+             <Link
+               to={`/tasks/${pickedTask.id}`}
+               className="min-h-11 inline-flex items-center justify-center px-4 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus hover:bg-surface text-fg-soft hover:text-fg"
+             >
               Anzeigen/bearbeiten
             </Link>
           </>

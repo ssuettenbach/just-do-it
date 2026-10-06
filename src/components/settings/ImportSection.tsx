@@ -101,90 +101,90 @@ export function ImportSection({ backup }: ImportSectionProps) {
     return { total: tasks.length, open, completed };
   };
 
-  return (
-    <section className="mb-8">
-      <h2 className="text-lg font-medium text-slate-200 mb-3">Backup importieren</h2>
-      <div className="space-y-3">
-        <label className="block">
-          <span className="text-slate-300 mb-2 block">Backup-Datei auswählen</span>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="application/json,.json"
-            onChange={handleFileChange}
-            disabled={importState.type === 'reading'}
-            className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-slate-700 file:text-slate-100 hover:file:bg-slate-600 cursor-pointer"
-          />
-        </label>
+    return (
+      <section className="mb-8">
+        <h2 className="text-lg font-medium text-fg mb-3">Backup importieren</h2>
+        <div className="space-y-3">
+          <label className="block">
+            <span className="text-fg mb-2 block">Backup-Datei auswählen</span>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="application/json,.json"
+              onChange={handleFileChange}
+              disabled={importState.type === 'reading'}
+              className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface file:text-fg hover:file:bg-surface-strong cursor-pointer"
+            />
+          </label>
 
-        {importState.type === 'invalid' && importState.validationResult && (
-          <div role="alert" className="text-red-400 text-sm space-y-1">
-            <p>Diese Datei kann nicht importiert werden.</p>
-            <ul className="list-disc list-inside">
-              {importState.validationResult.errors.map((err, i) => (
-                <li key={i}>{err}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {importState.type === 'valid' && importState.validationResult?.ok && (
-          <div className="space-y-3">
-            <p className="text-slate-300">
-              {(() => {
-                const { total, open, completed } = getTaskCounts(importState.validationResult.tasks);
-                return `${total} Aufgaben gefunden (${open} offen, ${completed} erledigt)`;
-              })()}
-            </p>
-            <div className="space-y-2 text-slate-400 text-sm">
-              <p>
-                <strong className="text-slate-200">Alle Daten ersetzen</strong> löscht alle
-                aktuellen Aufgaben und ersetzt sie durch das Backup.
-              </p>
-              <p>
-                <strong className="text-slate-200">Zusammenführen</strong> fügt nur noch nicht
-                vorhandene Aufgaben hinzu und lässt bestehende Aufgaben unverändert.
-              </p>
+          {importState.type === 'invalid' && importState.validationResult && (
+            <div role="alert" className="text-red-400 text-sm space-y-1">
+              <p>Diese Datei kann nicht importiert werden.</p>
+              <ul className="list-disc list-inside">
+                {importState.validationResult.errors.map((err, i) => (
+                  <li key={i}>{err}</li>
+                ))}
+              </ul>
             </div>
-            <div className="flex gap-3">
-              <Button variant="danger" onClick={handleReplaceAll} size="lg">
-                Alle Daten ersetzen
-              </Button>
-              <Button variant="secondary" onClick={handleMerge} size="lg">
-                Zusammenführen
-              </Button>
+          )}
+
+          {importState.type === 'valid' && importState.validationResult?.ok && (
+            <div className="space-y-3">
+              <p className="text-fg">
+                {(() => {
+                  const { total, open, completed } = getTaskCounts(importState.validationResult.tasks);
+                  return `${total} Aufgaben gefunden (${open} offen, ${completed} erledigt)`;
+                })()}
+              </p>
+              <div className="space-y-2 text-fg-muted text-sm">
+                <p>
+                  <strong className="text-fg">Alle Daten ersetzen</strong> löscht alle
+                  aktuellen Aufgaben und ersetzt sie durch das Backup.
+                </p>
+                <p>
+                  <strong className="text-fg">Zusammenführen</strong> fügt nur noch nicht
+                  vorhandene Aufgaben hinzu und lässt bestehende Aufgaben unverändert.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Button variant="danger" onClick={handleReplaceAll} size="lg">
+                  Alle Daten ersetzen
+                </Button>
+                <Button variant="secondary" onClick={handleMerge} size="lg">
+                  Zusammenführen
+                </Button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {status && (
-          <div role="status" className="text-green-400 text-sm">
-            {status}
-          </div>
-        )}
-        {error && (
-          <div role="alert" className="text-red-400 text-sm">
-            {error}
-          </div>
-        )}
+          {status && (
+            <div role="status" className="text-green-400 text-sm">
+              {status}
+            </div>
+          )}
+          {error && (
+            <div role="alert" className="text-red-400 text-sm">
+              {error}
+            </div>
+          )}
 
-        {importState.type === 'reading' && (
-          <div role="status" className="text-slate-400 text-sm">
-            Datei wird gelesen...
-          </div>
-        )}
-      </div>
+          {importState.type === 'reading' && (
+            <div role="status" className="text-fg-muted text-sm">
+              Datei wird gelesen...
+            </div>
+          )}
+        </div>
 
-      <ConfirmDialog
-        open={showReplaceDialog}
-        title="Alle Daten ersetzen?"
-        message={`Alle aktuellen Aufgaben inklusive Verlauf werden dauerhaft durch die ${importState.validationResult?.ok ? importState.validationResult.tasks.length : 0} Aufgaben aus dem Backup ersetzt.`}
-        confirmLabel="Alle Daten ersetzen"
-        cancelLabel="Abbrechen"
-        destructive
-        onConfirm={handleReplaceConfirm}
-        onCancel={() => setShowReplaceDialog(false)}
-      />
-    </section>
-  );
+        <ConfirmDialog
+          open={showReplaceDialog}
+          title="Alle Daten ersetzen?"
+          message={`Alle aktuellen Aufgaben inklusive Verlauf werden dauerhaft durch die ${importState.validationResult?.ok ? importState.validationResult.tasks.length : 0} Aufgaben aus dem Backup ersetzt.`}
+          confirmLabel="Alle Daten ersetzen"
+          cancelLabel="Abbrechen"
+          destructive
+          onConfirm={handleReplaceConfirm}
+          onCancel={() => setShowReplaceDialog(false)}
+        />
+      </section>
+    );
 }

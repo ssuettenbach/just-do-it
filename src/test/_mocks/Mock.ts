@@ -4,6 +4,7 @@ import { UseTaskMock } from './hooks/useTask.mock';
 import { UseKnownLabelsMock } from './hooks/useKnownLabels.mock';
 import { UseTaskActionsMock } from './hooks/useTaskActions.mock';
 import { UseBackupMock } from './hooks/useBackup.mock';
+import { UseThemeMock } from './hooks/useTheme.mock';
 
 export class Mock {
   static useOpenTasks = UseOpenTasksMock;
@@ -12,4 +13,5 @@ export class Mock {
   static useKnownLabels = UseKnownLabelsMock;
   static useTaskActions = UseTaskActionsMock;
   static useBackup = UseBackupMock;
+  static useTheme = UseThemeMock;
 }

@@ -1,8 +1,8 @@
 export function DataInfoSection() {
   return (
     <section className="mb-8">
-      <h2 className="text-lg font-medium text-slate-200 mb-3">Deine Daten bleiben auf diesem Gerät</h2>
-      <div className="space-y-2 text-slate-400 text-sm">
+      <h2 className="text-lg font-medium text-fg mb-3">Deine Daten bleiben auf diesem Gerät</h2>
+      <div className="space-y-2 text-fg-muted text-sm">
         <p>
           Aufgaben werden ausschließlich im lokalen Speicher (IndexedDB) dieses Browsers auf diesem
           Gerät gespeichert. Es gibt kein Konto, keinen Server, keine Synchronisierung und keine Analyse.

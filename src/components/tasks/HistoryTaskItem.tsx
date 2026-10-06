@@ -3,7 +3,7 @@ import type { Task } from '../../domain/types';
 import { TaskMeta } from '../TaskMeta';
 import { ConfirmDialog } from '../ConfirmDialog';
 import { Button } from '../Button';
-import { useTaskActions } from '../../hooks/useTaskActions';
+import { useTaskActions } from '../../hooks';
 import { formatDateTime } from '../format';
 
 interface HistoryTaskItemProps {
@@ -31,17 +31,17 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
     }
   };
 
-  return (
-    <li className="bg-slate-800 rounded-lg p-4 border border-slate-700">
+    return (
+    <li className="bg-surface rounded-lg p-4 border border-border">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-start">
-          <h3 className="text-lg font-medium text-slate-100 truncate">{task.title}</h3>
-          <span className="text-xs text-slate-500 whitespace-nowrap">
+          <h3 className="text-lg font-medium text-fg truncate">{task.title}</h3>
+          <span className="text-xs text-fg-subtle whitespace-nowrap">
             Erledigt am {formatDateTime(task.completedAt || '')}
           </span>
         </div>
         <TaskMeta task={task} />
-        {task.notes && <p className="text-sm text-slate-400">{task.notes}</p>}
+        {task.notes && <p className="text-sm text-fg-muted">{task.notes}</p>}
         <div className="flex gap-2 mt-2">
           <Button
             variant="secondary"

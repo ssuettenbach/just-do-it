@@ -16,16 +16,16 @@ const categoryLabels: Record<PickCategory, string> = {
 
 export function PickedTaskCard({ category, task, actions }: PickedTaskCardProps) {
   return (
-    <div className="bg-slate-800 rounded-xl p-6 shadow-lg">
-      <p className="text-sm text-indigo-400 font-medium mb-2">{categoryLabels[category]}</p>
-      <h2 className="text-xl font-semibold text-slate-100 mb-4">{task.title}</h2>
+    <div className="bg-surface rounded-xl p-6 shadow-lg">
+      <p className="text-sm text-accent-text font-medium mb-2">{categoryLabels[category]}</p>
+      <h2 className="text-xl font-semibold text-fg mb-4">{task.title}</h2>
       
       <div className="mb-4">
         <TaskMeta task={task} />
       </div>
       
       {task.notes && (
-        <p className="text-slate-300 text-sm mb-6 whitespace-pre-wrap">{task.notes}</p>
+        <p className="text-fg-soft text-sm mb-6 whitespace-pre-wrap">{task.notes}</p>
       )}
       
       <div className="flex flex-wrap gap-3">{actions}</div>

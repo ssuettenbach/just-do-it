@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import settingsIcon from '../images/settings.svg';
 import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
 import { EmptyState } from '../components/EmptyState';
@@ -70,7 +71,7 @@ export default function ManagePage({ tab }: ManagePageProps) {
 
   const renderOpenContent = () => {
     if (isLoadingOpen) {
-      return <p className="text-slate-400">Wird geladen...</p>;
+      return <p className="text-fg-muted">Wird geladen...</p>;
     }
 
     if (openTasks.length === 0) {
@@ -107,7 +108,7 @@ export default function ManagePage({ tab }: ManagePageProps) {
 
   const renderHistoryContent = () => {
     if (isLoadingCompleted) {
-      return <p className="text-slate-400">Wird geladen...</p>;
+      return <p className="text-fg-muted">Wird geladen...</p>;
     }
 
     if (completedTasks.length === 0) {
@@ -159,22 +160,22 @@ export default function ManagePage({ tab }: ManagePageProps) {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <PageHeader
+       <PageHeader
         title="Aufgaben verwalten"
         actions={
-          <Link to="/settings" className="text-slate-300 hover:text-slate-100 transition-colors">
-            Einstellungen
+          <Link to="/settings" className="text-fg-soft hover:text-fg transition-colors">
+            <img src={settingsIcon} alt="Einstellungen" className="size-6" />
           </Link>
         }
       />
 
-      <nav className="flex gap-2 mb-6 border-b border-slate-700 pb-2">
+       <nav className="flex gap-2 mb-6 border-b border-border pb-2">
         <Link
           to="/manage"
           className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
             tab === 'open'
-              ? 'bg-indigo-600 text-white'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+              ? 'bg-accent text-accent-fg'
+              : 'text-fg-muted hover:text-fg-soft hover:bg-surface'
           }`}
           aria-current={tab === 'open' ? 'page' : undefined}
         >
@@ -184,8 +185,8 @@ export default function ManagePage({ tab }: ManagePageProps) {
           to="/manage/history"
           className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
             tab === 'history'
-              ? 'bg-indigo-600 text-white'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+              ? 'bg-accent text-accent-fg'
+              : 'text-fg-muted hover:text-fg-soft hover:bg-surface'
           }`}
           aria-current={tab === 'history' ? 'page' : undefined}
         >
@@ -193,18 +194,18 @@ export default function ManagePage({ tab }: ManagePageProps) {
         </Link>
       </nav>
 
-      <details className="mb-6">
-        <summary className="cursor-pointer text-sm font-medium text-slate-300 hover:text-slate-100 py-2">
+       <details className="mb-6">
+        <summary className="cursor-pointer text-sm font-medium text-fg-soft hover:text-fg py-2">
           Filter
         </summary>
         <div className="mt-4 space-y-4">{renderFilters()}</div>
       </details>
 
-      {error && (
-        <div role="alert" className="mb-4 p-3 bg-red-900/30 border border-red-600 rounded-lg text-red-400 text-sm">
+       {error && (
+        <div role="alert" className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-600 rounded-lg text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
-      )}
+       )}
 
       {tab === 'open' ? renderOpenContent() : renderHistoryContent()}
     </div>
@@ -224,8 +225,8 @@ function OpenTaskFilters({ filters, knownLabels, onChange, onClear, hasActiveFil
 
   return (
     <div className="space-y-4">
-      <div>
-        <label htmlFor="open-text" className="block text-sm font-medium text-slate-400 mb-1">
+       <div>
+        <label htmlFor="open-text" className="block text-sm font-medium text-fg-muted mb-1">
           Suche
         </label>
         <input
@@ -234,19 +235,19 @@ function OpenTaskFilters({ filters, knownLabels, onChange, onClear, hasActiveFil
           value={filters.text}
           onChange={(e) => onChange({ text: e.target.value })}
           placeholder="Aufgaben durchsuchen..."
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus"
         />
       </div>
 
-      <div>
-        <label htmlFor="open-label" className="block text-sm font-medium text-slate-400 mb-1">
+       <div>
+        <label htmlFor="open-label" className="block text-sm font-medium text-fg-muted mb-1">
           Kennzeichnung
         </label>
         <select
           id="open-label"
           value={filters.label || ''}
           onChange={(e) => onChange({ label: e.target.value || null })}
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="">Alle Kennzeichnungen</option>
           {knownLabels.map((label) => (
@@ -257,15 +258,15 @@ function OpenTaskFilters({ filters, knownLabels, onChange, onClear, hasActiveFil
         </select>
       </div>
 
-      <div>
-        <label htmlFor="open-duration" className="block text-sm font-medium text-slate-400 mb-1">
+       <div>
+        <label htmlFor="open-duration" className="block text-sm font-medium text-fg-muted mb-1">
           Dauer
         </label>
         <select
           id="open-duration"
           value={filters.duration}
           onChange={(e) => onChange({ duration: e.target.value as OpenTaskFilters['duration'] })}
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="all">Alle</option>
           <option value="quick">Schnell (&le;5 Min)</option>
@@ -275,15 +276,15 @@ function OpenTaskFilters({ filters, knownLabels, onChange, onClear, hasActiveFil
         </select>
       </div>
 
-      <div>
-        <label htmlFor="open-due" className="block text-sm font-medium text-slate-400 mb-1">
+       <div>
+        <label htmlFor="open-due" className="block text-sm font-medium text-fg-muted mb-1">
           Fälligkeit
         </label>
         <select
           id="open-due"
           value={filters.due}
           onChange={(e) => onChange({ due: e.target.value as OpenTaskFilters['due'] })}
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="all">Alle</option>
           <option value="overdue">Überfällig</option>
@@ -313,8 +314,8 @@ interface HistoryTaskFiltersProps {
 function HistoryTaskFilters({ filters, knownLabels, onChange, onClear, hasActiveFilters }: HistoryTaskFiltersProps) {
   return (
     <div className="space-y-4">
-      <div>
-        <label htmlFor="history-text" className="block text-sm font-medium text-slate-400 mb-1">
+       <div>
+        <label htmlFor="history-text" className="block text-sm font-medium text-fg-muted mb-1">
           Suche
         </label>
         <input
@@ -323,19 +324,19 @@ function HistoryTaskFilters({ filters, knownLabels, onChange, onClear, hasActive
           value={filters.text}
           onChange={(e) => onChange({ text: e.target.value })}
           placeholder="Aufgaben durchsuchen..."
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus"
         />
       </div>
 
-      <div>
-        <label htmlFor="history-label" className="block text-sm font-medium text-slate-400 mb-1">
+       <div>
+        <label htmlFor="history-label" className="block text-sm font-medium text-fg-muted mb-1">
           Kennzeichnung
         </label>
         <select
           id="history-label"
           value={filters.label || ''}
           onChange={(e) => onChange({ label: e.target.value || null })}
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="">Alle Kennzeichnungen</option>
           {knownLabels.map((label) => (
@@ -347,8 +348,8 @@ function HistoryTaskFilters({ filters, knownLabels, onChange, onClear, hasActive
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="history-from" className="block text-sm font-medium text-slate-400 mb-1">
+         <div>
+          <label htmlFor="history-from" className="block text-sm font-medium text-fg-muted mb-1">
             Erledigt ab
           </label>
           <input
@@ -356,11 +357,11 @@ function HistoryTaskFilters({ filters, knownLabels, onChange, onClear, hasActive
             type="date"
             value={filters.completedFrom || ''}
             onChange={(e) => onChange({ completedFrom: e.target.value || null })}
-            className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 [color-scheme:dark]"
+            className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus [color-scheme:dark]"
           />
         </div>
         <div>
-          <label htmlFor="history-to" className="block text-sm font-medium text-slate-400 mb-1">
+          <label htmlFor="history-to" className="block text-sm font-medium text-fg-muted mb-1">
             Erledigt bis
           </label>
           <input
@@ -368,7 +369,7 @@ function HistoryTaskFilters({ filters, knownLabels, onChange, onClear, hasActive
             type="date"
             value={filters.completedTo || ''}
             onChange={(e) => onChange({ completedTo: e.target.value || null })}
-            className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 [color-scheme:dark]"
+            className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus [color-scheme:dark]"
           />
         </div>
       </div>

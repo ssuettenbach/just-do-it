@@ -3,7 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#4f46e5" />
+    <meta name="theme-color" content="#020617" />
+    <!-- Must stay in sync with src/theme/themeStore.ts -->
+    <script>
+      (function () {
+        try {
+          const THEME_STORAGE_KEY = 'justdoit.theme';
+          const THEME_COLORS = {
+            light: '#f8fafc',
+            dark: '#020617',
+          };
+
+          function getSystemTheme() {
+            if (typeof window === 'undefined' || !window.matchMedia) {
+              return 'dark';
+            }
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            return isDark ? 'dark' : 'light';
+          }
+
+          function readPreference() {
+            try {
+              const stored = localStorage.getItem(THEME_STORAGE_KEY);
+              if (stored === 'light' || stored === 'dark' || stored === 'system') {
+                return stored;
+              }
+            } catch {
+              // localStorage not available
+            }
+            return 'system';
+          }
+
+          function resolveTheme(pref) {
+            return pref === 'system' ? getSystemTheme() : pref;
+          }
+
+          function applyTheme(resolved) {
+            const html = document.documentElement;
+            html.classList.toggle('dark', resolved === 'dark');
+            html.style.colorScheme = resolved;
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+              metaThemeColor.setAttribute('content', THEME_COLORS[resolved]);
+            }
+          }
+
+          const preference = readPreference();
+          const resolved = resolveTheme(preference);
+          applyTheme(resolved);
+        } catch (e) {
+          // Silently ignore errors during theme initialization
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/just-do-it/icon.svg" />
     <title>Just Do It</title>
   </head>

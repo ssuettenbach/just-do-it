@@ -124,8 +124,8 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label htmlFor={titleId} className="block text-sm font-medium text-slate-300 mb-1">
+       <div>
+        <label htmlFor={titleId} className="block text-sm font-medium text-fg-soft mb-1">
           Titel
         </label>
         <input
@@ -138,17 +138,17 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
           aria-required="true"
           aria-invalid={errors.title !== undefined}
           aria-describedby={errors.title ? `${titleId}-error` : undefined}
-          className={`w-full rounded-lg bg-slate-700 border ${errors.title ? 'border-red-500' : 'border-slate-600'} px-3 py-2 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent`}
+          className={`w-full rounded-lg bg-surface-muted border ${errors.title ? 'border-red-600 dark:border-red-400' : 'border-border-strong'} px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus focus:border-transparent`}
         />
         {errors.title && (
-          <p id={`${titleId}-error`} className="mt-1 text-sm text-red-400" role="alert">
+          <p id={`${titleId}-error`} className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.title}
           </p>
         )}
       </div>
 
-      <div>
-        <label htmlFor={estimateId} className="block text-sm font-medium text-slate-300 mb-1">
+       <div>
+        <label htmlFor={estimateId} className="block text-sm font-medium text-fg-soft mb-1">
           Schätzung (Minuten)
         </label>
         <input
@@ -162,17 +162,17 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
           onChange={handleEstimateChange}
           aria-invalid={hasEstimateError}
           aria-describedby={hasEstimateError ? estimateErrorId : undefined}
-          className={`w-full rounded-lg bg-slate-700 border ${hasEstimateError ? 'border-red-500' : 'border-slate-600'} px-3 py-2 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent`}
+          className={`w-full rounded-lg bg-surface-muted border ${hasEstimateError ? 'border-red-600 dark:border-red-400' : 'border-border-strong'} px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus focus:border-transparent`}
         />
         {hasEstimateError && (
-          <p id={estimateErrorId} className="mt-1 text-sm text-red-400" role="alert">
+          <p id={estimateErrorId} className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.estimateMinutes}
           </p>
         )}
       </div>
 
-      <div>
-        <label htmlFor={dueDateId} className="block text-sm font-medium text-slate-300 mb-1">
+       <div>
+        <label htmlFor={dueDateId} className="block text-sm font-medium text-fg-soft mb-1">
           Fälligkeitsdatum
         </label>
         <input
@@ -183,17 +183,17 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
           onChange={handleDueDateChange}
           aria-invalid={hasDueDateError}
           aria-describedby={hasDueDateError ? dueDateErrorId : undefined}
-          className={`w-full rounded-lg bg-slate-700 border ${hasDueDateError ? 'border-red-500' : 'border-slate-600'} px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent [color-scheme:dark]`}
+          className={`w-full rounded-lg bg-surface-muted border ${hasDueDateError ? 'border-red-600 dark:border-red-400' : 'border-border-strong'} px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus focus:border-transparent [color-scheme:dark]`}
         />
         {hasDueDateError && (
-          <p id={dueDateErrorId} className="mt-1 text-sm text-red-400" role="alert">
+          <p id={dueDateErrorId} className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.dueDate}
           </p>
         )}
       </div>
 
-      <div>
-        <label htmlFor={notesId} className="block text-sm font-medium text-slate-300 mb-1">
+       <div>
+        <label htmlFor={notesId} className="block text-sm font-medium text-fg-soft mb-1">
           Notizen
         </label>
         <textarea
@@ -201,7 +201,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
           value={input.notes}
           onChange={(e) => handleChange('notes', e.target.value)}
           rows={3}
-          className="w-full rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+          className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus focus:border-transparent resize-none"
         />
       </div>
 

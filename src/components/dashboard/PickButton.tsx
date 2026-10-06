@@ -26,7 +26,7 @@ const categoryLabels: Record<PickCategory, string> = {
 };
 
 const baseClassName =
-    'w-full block bg-white/10 p-6 rounded-xl text-left transition-colors border-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300 disabled:opacity-60 disabled:cursor-not-allowed';
+    'w-full block bg-black/5 dark:bg-white/10 p-6 rounded-xl text-left transition-colors border-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-60 disabled:cursor-not-allowed';
 
 export const PickButton = (
     {category, subtitle, candidateCount, disabledMessage, disabled, className, ...props}: PickButtonProps
@@ -38,8 +38,8 @@ export const PickButton = (
             <div className={"flex flex-col gap-2 opacity-50 " + baseClassName}>
                 <div className="flex justify-between">
                     <div className="">
-                        <h2 className="text-xl font-semibold text-slate-100">{categoryLabels[category]}</h2>
-                        <p className="text-slate-400 text-xs">{disabledMessage}</p>
+                        <h2 className="text-xl font-semibold text-fg">{categoryLabels[category]}</h2>
+                        <p className="text-fg-muted text-xs">{disabledMessage}</p>
                     </div>
                     <img src={categoryIcons[category]} alt={categoryLabels[category]} className="size-12"/>
                 </div>
@@ -51,12 +51,12 @@ export const PickButton = (
         <Link
             to={`/pick/${category}`}
             {...props}
-            className={`${baseClassName} hover:bg-slate-800 ${className || ''}`}
+            className={`${baseClassName} hover:bg-surface ${className || ''}`}
         >
             <div className="flex justify-between">
                 <div className="">
-                    <h2 className="text-xl font-semibold text-slate-100">{categoryLabels[category]}</h2>
-                    <p className="text-slate-400">{subtitle}</p>
+                    <h2 className="text-xl font-semibold text-fg">{categoryLabels[category]}</h2>
+                    <p className="text-fg-muted">{subtitle}</p>
                 </div>
                 <img src={categoryIcons[category]} alt={categoryLabels[category]} className="size-12"/>
             </div>

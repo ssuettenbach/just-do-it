@@ -10,12 +10,12 @@ interface PageHeaderProps {
 export function PageHeader({ title, actions, backTo }: PageHeaderProps) {
   return (
     <header className="flex items-center justify-between mb-6">
-      {backTo ? (
-        <Link
-          to={backTo}
-          aria-label="Zurück"
-          className="text-slate-400 hover:text-slate-200 transition-colors"
-        >
+       {backTo ? (
+          <Link
+            to={backTo}
+            aria-label="Zurück"
+            className="text-fg-muted hover:text-fg transition-colors"
+          >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -33,7 +33,7 @@ export function PageHeader({ title, actions, backTo }: PageHeaderProps) {
       ) : (
         <div aria-hidden="true" className="w-6" />
       )}
-      <h1 className="text-xl font-semibold text-slate-100 truncate">{title}</h1>
+       <h1 className="text-xl font-semibold text-fg truncate">{title}</h1>
       {actions && <div className="flex gap-2">{actions}</div>}
     </header>
   );

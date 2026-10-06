@@ -8,7 +8,7 @@ export default function DashboardPage() {
   const { tasks, isLoading } = useOpenTasks();
 
   if (isLoading) {
-    return <p className="text-slate-400">Aufgaben werden geladen...</p>;
+    return <p className="text-fg-muted">Aufgaben werden geladen...</p>;
   }
 
   const quickCandidates = getCandidates(tasks, 'quick');
@@ -23,7 +23,7 @@ export default function DashboardPage() {
       >
         <Link
           to="/tasks/new"
-          className="text-indigo-400 hover:text-indigo-300 transition-colors"
+          className="text-accent-text hover:text-accent-text-hover transition-colors"
         >
           Aufgabe hinzufügen
         </Link>
@@ -34,8 +34,8 @@ export default function DashboardPage() {
   return (
     <div className="p-6 space-y-6">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-slate-100 mb-2">Just Do It</h1>
-        <p className="text-slate-400">Wähle eine Aufgabe und leg los</p>
+        <h1 className="text-2xl font-bold text-fg mb-2">Just Do It</h1>
+        <p className="text-fg-muted">Wähle eine Aufgabe und leg los</p>
       </div>
 
       <div className="space-y-4">
