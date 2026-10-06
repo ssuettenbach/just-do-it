@@ -4,7 +4,7 @@ interface IconProps {
 }
 
 export function Icon({ src, className = 'size-5' }: IconProps) {
-  const mask = `url(${src}) center / contain no-repeat`;
+  const mask = `url(${JSON.stringify(src)}) center / contain no-repeat`;
 
   return (
     <span
