@@ -7,6 +7,9 @@ import { Button } from '../Button';
 import { LabelInput } from './LabelInput';
 import { formatDate } from '../format';
 
+const ESTIMATE_PRESETS = [5, 15, 30, 45];
+const DEFAULT_ESTIMATE = ESTIMATE_PRESETS[0];
+
 interface TaskFormProps {
   mode: 'create' | 'edit';
   task?: Task;
@@ -25,7 +28,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
 
   const [input, setInput] = useState<TaskInput>({
     title: '',
-    estimateMinutes: null,
+    estimateMinutes: DEFAULT_ESTIMATE,
     dueDate: null,
     notes: '',
     labels: [],
@@ -56,18 +59,9 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
     }));
   };
 
-  const handleEstimateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEstimateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    if (value === '') {
-      handleChange('estimateMinutes', null);
-    } else {
-      const num = parseInt(value, 10);
-      if (!isNaN(num)) {
-        handleChange('estimateMinutes', num);
-      } else {
-        handleChange('estimateMinutes', null);
-      }
-    }
+    handleChange('estimateMinutes', value === '' ? null : parseInt(value, 10));
   };
 
   const handleDueDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,6 +111,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
     }
   };
 
+  const isLegacyEstimate = input.estimateMinutes === null || !ESTIMATE_PRESETS.includes(input.estimateMinutes);
   const hasEstimateError = errors.estimateMinutes !== undefined;
   const estimateErrorId = `${estimateId}-error`;
   const hasDueDateError = errors.dueDate !== undefined;
@@ -151,19 +146,26 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
         <label htmlFor={estimateId} className="block text-sm font-medium text-fg-soft mb-1">
           Schätzung (Minuten)
         </label>
-        <input
+        <select
           id={estimateId}
           ref={estimateRef}
-          type="number"
-          inputMode="numeric"
-          min={0}
-          step={1}
           value={input.estimateMinutes ?? ''}
           onChange={handleEstimateChange}
           aria-invalid={hasEstimateError}
           aria-describedby={hasEstimateError ? estimateErrorId : undefined}
-          className={`w-full rounded-lg bg-surface-muted border ${hasEstimateError ? 'border-red-600 dark:border-red-400' : 'border-border-strong'} px-3 py-2 text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-focus focus:border-transparent`}
-        />
+          className={`w-full rounded-lg bg-surface-muted border ${hasEstimateError ? 'border-red-600 dark:border-red-400' : 'border-border-strong'} px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus focus:border-transparent`}
+        >
+          {isLegacyEstimate && (
+            <option value={input.estimateMinutes ?? ''}>
+              {input.estimateMinutes === null ? 'Keine Schätzung' : `${input.estimateMinutes} Minuten`}
+            </option>
+          )}
+          {ESTIMATE_PRESETS.map((minutes) => (
+            <option key={minutes} value={minutes}>
+              {minutes} Minuten
+            </option>
+          ))}
+        </select>
         {hasEstimateError && (
           <p id={estimateErrorId} className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.estimateMinutes}
