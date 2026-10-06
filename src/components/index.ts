@@ -5,3 +5,9 @@ export { TaskMeta } from './TaskMeta';
 export { LabelChips } from './LabelChips';
 export { PageHeader } from './PageHeader';
 export { formatEstimate, formatDate, formatDateTime } from './format';
+export {
+  OpenFilterPanel,
+  HistoryFilterPanel,
+  OpenTaskContent,
+  HistoryTaskContent,
+} from './tasks';

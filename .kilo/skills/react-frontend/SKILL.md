@@ -60,6 +60,12 @@ export function EmptyState({ title, message, children }: EmptyStateProps) {
 }
 ```
 
+## Component Organization
+
+- Avoid functions returning components within page components. Instead, extract them into separate component files.
+- Each component should be in its own file with a clear, descriptive name.
+- Complex pages should be composed of multiple smaller, focused components rather than large functions returning JSX.
+
 ## Hooks
 
 - Thin adapters over `db/taskRepository` or `dexie-react-hooks` (`useLiveQuery`).
