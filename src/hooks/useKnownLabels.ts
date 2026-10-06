@@ -7,5 +7,5 @@ export function useKnownLabels() {
 
   const labels = tasks ? collectKnownLabels(tasks) : [];
 
-  return { labels };
+  return {labels};
 }

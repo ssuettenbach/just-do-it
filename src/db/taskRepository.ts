@@ -1,7 +1,7 @@
-import type { Task, TaskInput, PickCategory } from '../domain/types';
-import { db } from './database';
-import { createTask, applyUpdate, completeTask, reopenTask } from '../domain/taskFactory';
 import { getCandidates, pickRandom } from '../domain/picker';
+import { applyUpdate, completeTask, createTask, reopenTask } from '../domain/taskFactory';
+import type { PickCategory, Task, TaskInput } from '../domain/types';
+import { db } from './database';
 
 export async function addTask(input: TaskInput): Promise<Task> {
   const task = createTask(input);

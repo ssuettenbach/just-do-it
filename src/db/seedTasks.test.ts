@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { db } from './database';
-import { seedDatabase, clearDatabase } from './seedTasks';
+import { clearDatabase, seedDatabase } from './seedTasks';
 
 describe('seedTasks', () => {
   beforeEach(async () => {

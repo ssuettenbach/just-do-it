@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import type { Task } from '../../domain/types';
-import { TaskMeta } from '../TaskMeta';
-import { ConfirmDialog } from '../ConfirmDialog';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import undoIcon from '../../images/undo.svg';
-import trashIcon from '../../images/trash.svg';
 import { useTaskActions } from '../../hooks';
+import trashIcon from '../../images/trash.svg';
+import undoIcon from '../../images/undo.svg';
+import { Button } from '../Button';
+import { ConfirmDialog } from '../ConfirmDialog';
 import { formatDateTime } from '../format';
+import { Icon } from '../Icon';
+import { TaskMeta } from '../TaskMeta';
 
 interface HistoryTaskItemProps {
   task: Task;
   onActionError?: (error: string) => void;
 }
 
-export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
+export function HistoryTaskItem({task, onActionError}: HistoryTaskItemProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const { reopenTask, deleteTask } = useTaskActions();
+  const {reopenTask, deleteTask} = useTaskActions();
 
   const handleReopen = async () => {
     try {
@@ -34,7 +34,7 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
     }
   };
 
-    return (
+  return (
     <li className="bg-surface rounded-lg p-4 border border-border">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-start">
@@ -43,7 +43,7 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
             Erledigt am {formatDateTime(task.completedAt || '')}
           </span>
         </div>
-        <TaskMeta task={task} />
+        <TaskMeta task={task}/>
         {task.notes && <p className="text-sm text-fg-muted">{task.notes}</p>}
         <div className="flex justify-between gap-2 mt-2">
           <Button
@@ -52,7 +52,7 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
             onClick={handleReopen}
             aria-label={`${task.title} wieder öffnen`}
           >
-            <Icon src={undoIcon} />
+            <Icon src={undoIcon}/>
             Wieder öffnen
           </Button>
           <Button
@@ -61,7 +61,7 @@ export function HistoryTaskItem({ task, onActionError }: HistoryTaskItemProps) {
             onClick={() => setShowDeleteDialog(true)}
             aria-label={`${task.title} löschen`}
           >
-            <Icon src={trashIcon} />
+            <Icon src={trashIcon}/>
             Löschen
           </Button>
         </div>

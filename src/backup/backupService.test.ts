@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { db } from '../db/database';
-import { exportBackup, replaceAllTasks, mergeTasks } from './backupService';
-import { parseAndValidateBackup } from './backup';
 import { TestData } from '../test/TestData';
+import { parseAndValidateBackup } from './backup';
+import { exportBackup, mergeTasks, replaceAllTasks } from './backupService';
 
 describe('backupService', () => {
   beforeEach(async () => {
@@ -11,7 +11,7 @@ describe('backupService', () => {
 
   describe('exportBackup', () => {
     it('returns fileName and json', async () => {
-      const task = TestData.createTestTask({ title: 'Test Task' });
+      const task = TestData.createTestTask({title: 'Test Task'});
       await db.tasks.add(task);
 
       const result = await exportBackup();
@@ -22,8 +22,8 @@ describe('backupService', () => {
     });
 
     it('exports all tasks as valid backup document', async () => {
-      const t1 = TestData.createTestTask({ title: 'Task 1' });
-      const t2 = TestData.createTestTask({ title: 'Task 2' });
+      const t1 = TestData.createTestTask({title: 'Task 1'});
+      const t2 = TestData.createTestTask({title: 'Task 2'});
       await db.tasks.bulkAdd([t1, t2]);
 
       const result = await exportBackup();
@@ -50,12 +50,12 @@ describe('backupService', () => {
 
   describe('replaceAllTasks', () => {
     it('clears existing tasks and adds new ones in atomic transaction', async () => {
-      const existing = TestData.createTestTask({ title: 'Old Task' });
+      const existing = TestData.createTestTask({title: 'Old Task'});
       await db.tasks.add(existing);
 
       const newTasks = [
-        TestData.createTestTask({ title: 'New Task 1' }),
-        TestData.createTestTask({ title: 'New Task 2' }),
+        TestData.createTestTask({title: 'New Task 1'}),
+        TestData.createTestTask({title: 'New Task 2'}),
       ];
 
       const count = await replaceAllTasks(newTasks);
@@ -92,13 +92,13 @@ describe('backupService', () => {
 
   describe('mergeTasks', () => {
     it('imports new tasks and keeps existing ones', async () => {
-      const existing = TestData.createTestTask({ id: 'existing-1', title: 'Existing' });
+      const existing = TestData.createTestTask({id: 'existing-1', title: 'Existing'});
       await db.tasks.add(existing);
 
       const toMerge = [
-        TestData.createTestTask({ id: 'new-1', title: 'New Task 1' }),
-        TestData.createTestTask({ id: 'existing-1', title: 'Duplicate' }),
-        TestData.createTestTask({ id: 'new-2', title: 'New Task 2' }),
+        TestData.createTestTask({id: 'new-1', title: 'New Task 1'}),
+        TestData.createTestTask({id: 'existing-1', title: 'Duplicate'}),
+        TestData.createTestTask({id: 'new-2', title: 'New Task 2'}),
       ];
 
       const result = await mergeTasks(toMerge);
@@ -111,10 +111,10 @@ describe('backupService', () => {
     });
 
     it('preserves existing record when duplicate id', async () => {
-      const originalTask = TestData.createTestTask({ id: 'task-1', title: 'Original Title' });
+      const originalTask = TestData.createTestTask({id: 'task-1', title: 'Original Title'});
       await db.tasks.add(originalTask);
 
-      const duplicate = TestData.createTestTask({ id: 'task-1', title: 'Modified Title' });
+      const duplicate = TestData.createTestTask({id: 'task-1', title: 'Modified Title'});
       const result = await mergeTasks([duplicate]);
 
       const stored = await db.tasks.get('task-1');
@@ -123,14 +123,14 @@ describe('backupService', () => {
     });
 
     it('returns imported and skipped counts', async () => {
-      const t1 = TestData.createTestTask({ id: 'a' });
-      const t2 = TestData.createTestTask({ id: 'b' });
+      const t1 = TestData.createTestTask({id: 'a'});
+      const t2 = TestData.createTestTask({id: 'b'});
       await db.tasks.bulkAdd([t1, t2]);
 
       const toMerge = [
-        TestData.createTestTask({ id: 'a' }), // duplicate
-        TestData.createTestTask({ id: 'c' }), // new
-        TestData.createTestTask({ id: 'd' }), // new
+        TestData.createTestTask({id: 'a'}), // duplicate
+        TestData.createTestTask({id: 'c'}), // new
+        TestData.createTestTask({id: 'd'}), // new
       ];
 
       const result = await mergeTasks(toMerge);
@@ -151,8 +151,8 @@ describe('backupService', () => {
 
     it('is atomic: all or nothing', async () => {
       const toMerge = [
-        TestData.createTestTask({ id: 'new-1' }),
-        TestData.createTestTask({ id: 'new-2' }),
+        TestData.createTestTask({id: 'new-1'}),
+        TestData.createTestTask({id: 'new-2'}),
       ];
 
       const result = await mergeTasks(toMerge);

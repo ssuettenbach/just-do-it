@@ -3,76 +3,75 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-bg: var(--color-slate-50);
-  --color-surface: white;
-  --color-surface-alt: white;
-  --color-surface-muted: var(--color-slate-100);
-  --color-surface-strong: var(--color-slate-200);
-  --color-border: var(--color-slate-200);
-  --color-border-subtle: var(--color-slate-200);
-  --color-border-strong: var(--color-slate-300);
-  --color-fg: var(--color-slate-900);
-  --color-fg-soft: var(--color-slate-700);
-  --color-fg-muted: var(--color-slate-600);
-  --color-fg-subtle: var(--color-slate-500);
-  --color-accent: var(--color-indigo-600);
-  --color-accent-hover: var(--color-indigo-700);
-  --color-accent-fg: white;
-  --color-accent-text: var(--color-indigo-700);
-  --color-accent-text-hover: var(--color-indigo-800);
-  --color-focus: var(--color-indigo-500);
+    --color-bg: var(--color-slate-50);
+    --color-surface: white;
+    --color-surface-alt: white;
+    --color-surface-muted: var(--color-slate-100);
+    --color-surface-strong: var(--color-slate-200);
+    --color-border: var(--color-slate-200);
+    --color-border-subtle: var(--color-slate-200);
+    --color-border-strong: var(--color-slate-300);
+    --color-fg: var(--color-slate-900);
+    --color-fg-soft: var(--color-slate-700);
+    --color-fg-muted: var(--color-slate-600);
+    --color-fg-subtle: var(--color-slate-500);
+    --color-accent: var(--color-indigo-600);
+    --color-accent-hover: var(--color-indigo-700);
+    --color-accent-fg: white;
+    --color-accent-text: var(--color-indigo-700);
+    --color-accent-text-hover: var(--color-indigo-800);
+    --color-focus: var(--color-indigo-500);
 }
 
 .dark {
-  --color-bg: var(--color-slate-950);
-  --color-surface: var(--color-slate-800);
-  --color-surface-alt: var(--color-slate-900);
-  --color-surface-muted: var(--color-slate-700);
-  --color-surface-strong: var(--color-slate-600);
-  --color-border: var(--color-slate-700);
-  --color-border-subtle: var(--color-slate-800);
-  --color-border-strong: var(--color-slate-600);
-  --color-fg: var(--color-slate-100);
-  --color-fg-soft: var(--color-slate-300);
-  --color-fg-muted: var(--color-slate-400);
-  --color-fg-subtle: var(--color-slate-500);
-  --color-accent: var(--color-indigo-600);
-  --color-accent-hover: var(--color-indigo-700);
-  --color-accent-fg: white;
-  --color-accent-text: var(--color-indigo-400);
-  --color-accent-text-hover: var(--color-indigo-300);
-  --color-focus: var(--color-indigo-300);
+    --color-bg: var(--color-slate-950);
+    --color-surface: var(--color-slate-800);
+    --color-surface-alt: var(--color-slate-900);
+    --color-surface-muted: var(--color-slate-700);
+    --color-surface-strong: var(--color-slate-600);
+    --color-border: var(--color-slate-700);
+    --color-border-subtle: var(--color-slate-800);
+    --color-border-strong: var(--color-slate-600);
+    --color-fg: var(--color-slate-100);
+    --color-fg-soft: var(--color-slate-300);
+    --color-fg-muted: var(--color-slate-400);
+    --color-fg-subtle: var(--color-slate-500);
+    --color-accent: var(--color-indigo-600);
+    --color-accent-hover: var(--color-indigo-700);
+    --color-accent-fg: white;
+    --color-accent-text: var(--color-indigo-400);
+    --color-accent-text-hover: var(--color-indigo-300);
+    --color-focus: var(--color-indigo-300);
 }
 
 @layer base {
-  html {
-    min-height: 100dvh;
-  }
-
-  :root {
-    color-scheme: light;
-  }
-
-  .dark {
-    color-scheme: dark;
-  }
-
-  body {
-    @apply bg-bg text-fg;
-    min-height: 100dvh;
-    -webkit-tap-highlight-color: transparent;
-    @media (prefers-reduced-motion: no-preference) {
-      transition: background-color 0.3s ease, color 0.3s ease;
+    html {
+        min-height: 100dvh;
     }
-  }
 
-  :focus-visible {
-    outline: 3px solid var(--color-focus);
-    outline-offset: 2px;
-  }
+    :root {
+        color-scheme: light;
+    }
+
+    .dark {
+        color-scheme: dark;
+    }
+
+    body {
+        @apply bg-bg text-fg;
+        min-height: 100dvh;
+        -webkit-tap-highlight-color: transparent;
+        @media (prefers-reduced-motion: no-preference) {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--color-focus);
+        outline-offset: 2px;
+    }
 }
 
 @utility safe-inset {
-  padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right))
-    max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));
+    padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right)) max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));
 }

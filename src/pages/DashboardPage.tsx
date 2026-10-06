@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useOpenTasks } from '../hooks';
+import { EmptyState, PickButton } from '../components';
 import { getCandidates } from '../domain/picker';
-import { EmptyState } from '../components';
-import { PickButton } from '../components/dashboard/PickButton';
+import { useOpenTasks } from '../hooks';
 
 export default function DashboardPage() {
-  const { tasks, isLoading } = useOpenTasks();
+  const {tasks, isLoading} = useOpenTasks();
 
   if (isLoading) {
     return <p className="text-fg-muted">Aufgaben werden geladen...</p>;
@@ -39,12 +38,12 @@ export default function DashboardPage() {
       </div>
 
       <div className="space-y-4">
-         <PickButton
-           category="quick"
-           subtitle="5 Min oder weniger"
-           candidateCount={quickCandidates.length}
-           disabledMessage="Keine offenen Aufgaben mit einer Schätzung von 5 Minuten oder weniger."
-         />
+        <PickButton
+          category="quick"
+          subtitle="5 Min oder weniger"
+          candidateCount={quickCandidates.length}
+          disabledMessage="Keine offenen Aufgaben mit einer Schätzung von 5 Minuten oder weniger."
+        />
 
         <PickButton
           category="any"
@@ -52,12 +51,12 @@ export default function DashboardPage() {
           candidateCount={anyCandidates.length}
         />
 
-         <PickButton
-           category="big"
-           subtitle="30 Min oder mehr"
-           candidateCount={bigCandidates.length}
-           disabledMessage="Keine offenen Aufgaben mit einer Schätzung von 30 Minuten oder mehr."
-         />
+        <PickButton
+          category="big"
+          subtitle="30 Min oder mehr"
+          candidateCount={bigCandidates.length}
+          disabledMessage="Keine offenen Aufgaben mit einer Schätzung von 30 Minuten oder mehr."
+        />
       </div>
     </div>
   );

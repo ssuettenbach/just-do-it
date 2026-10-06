@@ -3,19 +3,19 @@
 
         <!-- Oberfläche: Sehr helles Blau (#d9f4ff wie gewünscht) -->
         <linearGradient id="gTop" x1="20%" y1="0%" x2="80%" y2="100%">
-            <stop offset="0%"   stop-color="#f0fbff"/>
+            <stop offset="0%" stop-color="#f0fbff"/>
             <stop offset="100%" stop-color="#d9f4ff"/>
         </linearGradient>
 
         <!-- Linke Fläche: Mittleres Blau -->
         <linearGradient id="gLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#9ad4ec"/>
+            <stop offset="0%" stop-color="#9ad4ec"/>
             <stop offset="100%" stop-color="#74bce0"/>
         </linearGradient>
 
         <!-- Rechte Fläche: Dunkleres Blau (Schatten) -->
         <linearGradient id="gRight" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#56a4c8"/>
+            <stop offset="0%" stop-color="#56a4c8"/>
             <stop offset="100%" stop-color="#3c90b8"/>
         </linearGradient>
 
@@ -42,24 +42,24 @@
     <ellipse cx="50" cy="30" rx="4.8" ry="3" fill="#162e52"/>
 
     <!-- Linke Fläche: 5 Punkte (Würfelmuster) -->
-    <circle cx="25"  cy="42.5" r="2.8" fill="#162e52"/>
-    <circle cx="42"  cy="54"   r="2.8" fill="#162e52"/>
-    <circle cx="32"  cy="58.5" r="2.7" fill="#162e52"/>
-    <circle cx="25"  cy="65"   r="2.8" fill="#162e52"/>
-    <circle cx="42"  cy="74" r="2.8" fill="#162e52"/>
+    <circle cx="25" cy="42.5" r="2.8" fill="#162e52"/>
+    <circle cx="42" cy="54" r="2.8" fill="#162e52"/>
+    <circle cx="32" cy="58.5" r="2.7" fill="#162e52"/>
+    <circle cx="25" cy="65" r="2.8" fill="#162e52"/>
+    <circle cx="42" cy="74" r="2.8" fill="#162e52"/>
 
     <!-- Rechte Fläche: 6 Punkte (2×3 Würfelmuster) -->
-    <circle cx="73"  cy="45"   r="2.5"   fill="#162e52"/>
-    <circle cx="73"  cy="55"   r="2.5"   fill="#162e52"/>
-    <circle cx="73.5"  cy="65"   r="2.5"   fill="#162e52"/>
-    <circle cx="60"  cy="52"   r="2.5"   fill="#162e52"/>
-    <circle cx="60"  cy="62"   r="2.5"   fill="#162e52"/>
-    <circle cx="60"  cy="72"   r="2.5"   fill="#162e52"/>
+    <circle cx="73" cy="45" r="2.5" fill="#162e52"/>
+    <circle cx="73" cy="55" r="2.5" fill="#162e52"/>
+    <circle cx="73.5" cy="65" r="2.5" fill="#162e52"/>
+    <circle cx="60" cy="52" r="2.5" fill="#162e52"/>
+    <circle cx="60" cy="62" r="2.5" fill="#162e52"/>
+    <circle cx="60" cy="72" r="2.5" fill="#162e52"/>
 
     <!-- ── Innere Kanten vom Mittelpunkt G(50,50) ── -->
-    <line x1="50" y1="50" x2="17" y2="29" stroke="#162e52" stroke-width="4"   stroke-linecap="round"/>
-    <line x1="50" y1="50" x2="83" y2="29" stroke="#162e52" stroke-width="4"   stroke-linecap="round"/>
-    <line x1="50" y1="50" x2="50" y2="86" stroke="#162e52" stroke-width="4"   stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="17" y2="29" stroke="#162e52" stroke-width="4" stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="83" y2="29" stroke="#162e52" stroke-width="4" stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="50" y2="86" stroke="#162e52" stroke-width="4" stroke-linecap="round"/>
 
     <!-- ── Äußerer Umriss: gerundetes Hexagon ── -->
     <path d="M 42.9,15.7  Q 50,12    57.1,15.7

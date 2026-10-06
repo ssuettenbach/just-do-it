@@ -1,6 +1,5 @@
-import type { Task, OpenTaskFilters, HistoryFilters, DurationFilter } from './types';
-import { getDueStatus } from './dates';
-import { todayLocal } from './dates';
+import { getDueStatus, todayLocal } from './dates';
+import type { DurationFilter, HistoryFilters, OpenTaskFilters, Task } from './types';
 
 export const DEFAULT_OPEN_FILTERS: OpenTaskFilters = {
   text: '',
@@ -78,7 +77,7 @@ export function filterOpenTasks(tasks: Task[], filters: OpenTaskFilters, today?:
     const aStatus = getDueStatus(a.dueDate, todayStr);
     const bStatus = getDueStatus(b.dueDate, todayStr);
 
-    const statusOrder: Record<string, number> = { overdue: 0, today: 1, upcoming: 2, none: 3 };
+    const statusOrder: Record<string, number> = {overdue: 0, today: 1, upcoming: 2, none: 3};
     const aOrder = statusOrder[aStatus];
     const bOrder = statusOrder[bStatus];
 

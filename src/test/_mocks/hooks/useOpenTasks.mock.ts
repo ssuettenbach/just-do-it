@@ -1,7 +1,5 @@
 import { vi } from 'vitest';
 import * as useOpenTasksModule from '../../../hooks/useOpenTasks';
-import type { Task } from '../../../domain/types';
-import { TestData } from '../../TestData';
 
 class UseOpenTasksMock {
   static DEFAULT: ReturnType<typeof useOpenTasksModule.useOpenTasks> = {

@@ -1,6 +1,5 @@
 import { vi } from 'vitest';
 import * as useTaskModule from '../../../hooks/useTask';
-import { TestData } from '../../TestData';
 
 class UseTaskMock {
   static DEFAULT: ReturnType<typeof useTaskModule.useTask> = {

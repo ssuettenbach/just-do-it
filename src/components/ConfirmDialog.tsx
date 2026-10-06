@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useEffect, useRef, useCallback, useId } from 'react';
+import { useCallback, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from './Button';
 
@@ -10,20 +10,22 @@ interface ConfirmDialogProps {
   confirmLabel: string;
   cancelLabel?: string;
   destructive?: boolean;
+
   onConfirm(): void;
+
   onCancel(): void;
 }
 
 export function ConfirmDialog({
-  open,
-  title,
-  message,
-  confirmLabel,
-  cancelLabel = 'Abbrechen',
-  destructive = false,
-  onConfirm,
-  onCancel,
-}: ConfirmDialogProps) {
+                                open,
+                                title,
+                                message,
+                                confirmLabel,
+                                cancelLabel = 'Abbrechen',
+                                destructive = false,
+                                onConfirm,
+                                onCancel,
+                              }: ConfirmDialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -71,13 +73,13 @@ export function ConfirmDialog({
         onClick={onCancel}
         aria-hidden="true"
       />
-       <div className="relative bg-surface rounded-xl p-6 max-w-sm w-full shadow-xl">
-         <h2 id={titleId} className="text-xl font-semibold text-fg mb-3">
-           {title}
-         </h2>
-         <div id={messageId} className="text-fg-soft mb-6">
-           {message}
-         </div>
+      <div className="relative bg-surface rounded-xl p-6 max-w-sm w-full shadow-xl">
+        <h2 id={titleId} className="text-xl font-semibold text-fg mb-3">
+          {title}
+        </h2>
+        <div id={messageId} className="text-fg-soft mb-6">
+          {message}
+        </div>
         <div className="flex gap-3 justify-end">
           <Button variant="secondary" onClick={onCancel} ref={cancelButtonRef}>
             {cancelLabel}

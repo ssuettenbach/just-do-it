@@ -4,7 +4,7 @@ interface TaskSearchInputProps {
   onChange: (text: string) => void;
 }
 
-export function TaskSearchInput({ id, value, onChange }: TaskSearchInputProps) {
+export function TaskSearchInput({id, value, onChange}: TaskSearchInputProps) {
   return (
     <div className="mb-4">
       <label htmlFor={id} className="block text-sm font-medium text-fg-muted mb-1">

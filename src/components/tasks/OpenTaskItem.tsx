@@ -5,19 +5,19 @@ import { useTaskActions } from '../../hooks';
 import checkIcon from '../../images/check.svg';
 import editIcon from '../../images/edit.svg';
 import trashIcon from '../../images/trash.svg';
-import {TaskMeta} from "../TaskMeta";
-import {Button} from "../Button";
-import {Icon} from "../Icon";
-import {ConfirmDialog} from "../ConfirmDialog";
+import { Button } from "../Button";
+import { ConfirmDialog } from "../ConfirmDialog";
+import { Icon } from "../Icon";
+import { TaskMeta } from "../TaskMeta";
 
 interface OpenTaskItemProps {
   task: Task;
   onActionError?: (error: string) => void;
 }
 
-export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
+export function OpenTaskItem({task, onActionError}: OpenTaskItemProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const { completeTask, deleteTask } = useTaskActions();
+  const {completeTask, deleteTask} = useTaskActions();
 
   const handleComplete = async () => {
     try {
@@ -35,11 +35,11 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
     }
   };
 
-    return (
+  return (
     <li className="bg-surface rounded-lg p-4 border border-border">
       <div className="flex flex-col gap-2">
         <h3 className="text-lg font-medium text-fg truncate">{task.title}</h3>
-        <TaskMeta task={task} />
+        <TaskMeta task={task}/>
         {task.notes && <p className="text-sm text-fg-muted">{task.notes}</p>}
         <div className="flex gap-2 mt-2">
           <Button
@@ -48,7 +48,7 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
             onClick={handleComplete}
             aria-label={`${task.title} erledigen`}
           >
-            <Icon src={checkIcon} />
+            <Icon src={checkIcon}/>
             Erledigt
           </Button>
           <Link to={`/tasks/${task.id}`} className="flex-1">
@@ -58,7 +58,7 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
               className="w-full"
               aria-label={`${task.title} bearbeiten`}
             >
-              <Icon src={editIcon} />
+              <Icon src={editIcon}/>
               Bearbeiten
             </Button>
           </Link>
@@ -68,7 +68,7 @@ export function OpenTaskItem({ task, onActionError }: OpenTaskItemProps) {
             onClick={() => setShowDeleteDialog(true)}
             aria-label={`${task.title} löschen`}
           >
-            <Icon src={trashIcon} />
+            <Icon src={trashIcon}/>
             Löschen
           </Button>
         </div>

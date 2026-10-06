@@ -1,11 +1,9 @@
-import type { ReactNode } from 'react';
-
 interface LabelChipsProps {
   labels: string[];
   onRemove?: (label: string) => void;
 }
 
-export function LabelChips({ labels, onRemove }: LabelChipsProps) {
+export function LabelChips({labels, onRemove}: LabelChipsProps) {
   if (labels.length === 0) {
     return null;
   }
@@ -13,18 +11,18 @@ export function LabelChips({ labels, onRemove }: LabelChipsProps) {
   return (
     <div className="flex flex-wrap gap-1">
       {labels.map((label) => (
-         <span
-           key={label}
-           className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-muted text-fg text-xs font-medium"
-         >
+        <span
+          key={label}
+          className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-muted text-fg text-xs font-medium"
+        >
            {label}
-           {onRemove && (
-             <button
-               type="button"
-               onClick={() => onRemove(label)}
-               aria-label={`Kennzeichnung ${label} entfernen`}
-               className="ml-1.5 text-fg-muted hover:text-fg-soft focus:outline-none"
-             >
+          {onRemove && (
+            <button
+              type="button"
+              onClick={() => onRemove(label)}
+              aria-label={`Kennzeichnung ${label} entfernen`}
+              className="ml-1.5 text-fg-muted hover:text-fg-soft focus:outline-none"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -36,7 +34,7 @@ export function LabelChips({ labels, onRemove }: LabelChipsProps) {
                 className="w-3.5 h-3.5"
                 aria-hidden="true"
               >
-                <path d="M18 6 6 18M6 6l12 12" />
+                <path d="M18 6 6 18M6 6l12 12"/>
               </svg>
             </button>
           )}

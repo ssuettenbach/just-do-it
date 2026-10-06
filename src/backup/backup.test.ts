@@ -1,13 +1,13 @@
-﻿import { describe, it, expect } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
+import { TestData } from '../test/TestData';
 import {
   BACKUP_FORMAT,
   BACKUP_VERSION,
-  createBackup,
-  serializeBackup,
   backupFileName,
+  createBackup,
   parseAndValidateBackup,
+  serializeBackup,
 } from './backup';
-import { TestData } from '../test/TestData';
 
 describe('backup', () => {
   describe('constants', () => {
@@ -22,7 +22,7 @@ describe('backup', () => {
 
   describe('createBackup', () => {
     it('creates backup document with correct structure', () => {
-      const tasks = [TestData.createTestTask({ title: 'Task 1' })];
+      const tasks = [TestData.createTestTask({title: 'Task 1'})];
       const now = new Date('2026-10-05T14:30:00.000Z');
 
       const backup = createBackup(tasks, now);
@@ -34,7 +34,7 @@ describe('backup', () => {
     });
 
     it('creates deep copy of tasks', () => {
-      const original = TestData.createTestTask({ title: 'Original' });
+      const original = TestData.createTestTask({title: 'Original'});
       const backup = createBackup([original]);
 
       backup.tasks[0].title = 'Modified';
@@ -64,8 +64,8 @@ describe('backup', () => {
 
   describe('parseAndValidateBackup', () => {
     it('parses valid backup document', () => {
-      const task = TestData.createTestTask({ id: 'task-1', title: 'Test', status: 'open' });
-      const doc = TestData.createTestBackupDocument({ tasks: [task] });
+      const task = TestData.createTestTask({id: 'task-1', title: 'Test', status: 'open'});
+      const doc = TestData.createTestBackupDocument({tasks: [task]});
       const json = serializeBackup(doc);
 
       const result = parseAndValidateBackup(json);
@@ -86,7 +86,7 @@ describe('backup', () => {
     });
 
     it('rejects wrong format', () => {
-      const result = parseAndValidateBackup(JSON.stringify({ format: 'wrong-format', version: 1, tasks: [] }));
+      const result = parseAndValidateBackup(JSON.stringify({format: 'wrong-format', version: 1, tasks: []}));
       expect(result.ok).toBe(false);
       if (!result.ok) {
         expect(result.errors.some((e) => e.includes('Ungültiges Format'))).toBe(true);
@@ -434,7 +434,7 @@ describe('backup', () => {
 
     it('reports at most 20 errors then adds "...and N more" line', () => {
       const now = new Date().toISOString();
-      const invalidTasks = Array.from({ length: 30 }, (_, i) => ({
+      const invalidTasks = Array.from({length: 30}, (_, i) => ({
         id: '', // invalid: empty id
         title: 'Test',
         estimateMinutes: null,

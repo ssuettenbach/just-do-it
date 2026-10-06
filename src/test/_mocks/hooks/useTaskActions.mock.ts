@@ -7,7 +7,7 @@ class UseTaskActionsMock {
     return {
       addTask: vi.fn().mockResolvedValue(TestData.createTestTask()),
       updateTask: vi.fn().mockResolvedValue(TestData.createTestTask()),
-      completeTask: vi.fn().mockResolvedValue(TestData.createTestTask({ status: 'completed' })),
+      completeTask: vi.fn().mockResolvedValue(TestData.createTestTask({status: 'completed'})),
       reopenTask: vi.fn().mockResolvedValue(TestData.createTestTask()),
       deleteTask: vi.fn().mockResolvedValue(undefined),
     };

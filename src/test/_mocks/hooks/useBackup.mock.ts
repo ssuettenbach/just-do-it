@@ -1,15 +1,14 @@
 import { vi } from 'vitest';
 import * as useBackupModule from '../../../hooks/useBackup';
-import { TestData } from '../../TestData';
 
 class UseBackupMock {
   static get DEFAULT() {
     return {
-      exportBackup: vi.fn().mockResolvedValue({ fileName: 'test-backup.json', json: '{}' }),
+      exportBackup: vi.fn().mockResolvedValue({fileName: 'test-backup.json', json: '{}'}),
       downloadBackup: vi.fn(),
-      validateBackup: vi.fn().mockReturnValue({ ok: true, tasks: [] }),
+      validateBackup: vi.fn().mockReturnValue({ok: true, tasks: []}),
       replaceAll: vi.fn().mockResolvedValue(0),
-      merge: vi.fn().mockResolvedValue({ imported: 0, skipped: 0 }),
+      merge: vi.fn().mockResolvedValue({imported: 0, skipped: 0}),
     };
   }
 

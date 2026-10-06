@@ -6,7 +6,7 @@ interface EmptyStateProps {
   children?: ReactNode;
 }
 
-export function EmptyState({ title, message, children }: EmptyStateProps) {
+export function EmptyState({title, message, children}: EmptyStateProps) {
   return (
     <div className="text-center py-12">
       <h2 className="text-xl font-semibold text-fg mb-2">{title}</h2>

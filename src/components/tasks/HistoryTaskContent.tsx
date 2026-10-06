@@ -1,9 +1,7 @@
+import type { Task } from '../../domain/types';
 import { Button } from '../Button';
-import { Icon } from '../Icon';
-import resetIcon from '../../images/reset.svg';
 import { EmptyState } from '../EmptyState';
 import { HistoryTaskItem } from './HistoryTaskItem';
-import type { Task } from '../../domain/types';
 
 interface HistoryTaskContentProps {
   tasks: Task[];
@@ -15,19 +13,19 @@ interface HistoryTaskContentProps {
 }
 
 export function HistoryTaskContent({
-  tasks,
-  filteredTasks,
-  isLoading,
-  activeFilters,
-  onClearFilters,
-  onActionError,
-}: HistoryTaskContentProps) {
+                                     tasks,
+                                     filteredTasks,
+                                     isLoading,
+                                     activeFilters,
+                                     onClearFilters,
+                                     onActionError,
+                                   }: HistoryTaskContentProps) {
   if (isLoading) {
     return <p className="text-fg-muted">Wird geladen...</p>;
   }
 
   if (tasks.length === 0) {
-    return <EmptyState title="Noch keine erledigten Aufgaben" />;
+    return <EmptyState title="Noch keine erledigten Aufgaben"/>;
   }
 
   if (filteredTasks.length === 0 && activeFilters) {
@@ -43,7 +41,7 @@ export function HistoryTaskContent({
   return (
     <ul className="space-y-3">
       {filteredTasks.map((task) => (
-        <HistoryTaskItem key={task.id} task={task} onActionError={onActionError} />
+        <HistoryTaskItem key={task.id} task={task} onActionError={onActionError}/>
       ))}
     </ul>
   );

@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { QUICK_MAX_MINUTES, BIG_MIN_MINUTES, isEligible, getCandidates, randomIndex, pickRandom } from './picker';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { TestData } from '../test/TestData';
+import { BIG_MIN_MINUTES, getCandidates, isEligible, pickRandom, QUICK_MAX_MINUTES, randomIndex } from './picker';
 
 describe('picker', () => {
   describe('constants', () => {
@@ -15,55 +15,55 @@ describe('picker', () => {
 
   describe('isEligible', () => {
     it('excludes completed tasks', () => {
-      const task = TestData.createTestTask({ status: 'completed', estimateMinutes: 3 });
+      const task = TestData.createTestTask({status: 'completed', estimateMinutes: 3});
       expect(isEligible(task, 'quick')).toBe(false);
       expect(isEligible(task, 'any')).toBe(false);
     });
 
     it('quick: includes tasks with 0-5 minutes', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 0 }), 'quick')).toBe(true);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 3 }), 'quick')).toBe(true);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 5 }), 'quick')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 0}), 'quick')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 3}), 'quick')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 5}), 'quick')).toBe(true);
     });
 
     it('quick: excludes tasks with 6+ minutes', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 6 }), 'quick')).toBe(false);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 29 }), 'quick')).toBe(false);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 30 }), 'quick')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 6}), 'quick')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 29}), 'quick')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 30}), 'quick')).toBe(false);
     });
 
     it('quick: excludes null estimate', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: null }), 'quick')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: null}), 'quick')).toBe(false);
     });
 
     it('big: includes tasks with 30+ minutes', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 30 }), 'big')).toBe(true);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 120 }), 'big')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 30}), 'big')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 120}), 'big')).toBe(true);
     });
 
     it('big: excludes tasks with 0-29 minutes', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 0 }), 'big')).toBe(false);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 5 }), 'big')).toBe(false);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 29 }), 'big')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 0}), 'big')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 5}), 'big')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 29}), 'big')).toBe(false);
     });
 
     it('big: excludes null estimate', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: null }), 'big')).toBe(false);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: null}), 'big')).toBe(false);
     });
 
     it('any: includes all open tasks including null estimate', () => {
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: null }), 'any')).toBe(true);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 0 }), 'any')).toBe(true);
-      expect(isEligible(TestData.createTestTask({ estimateMinutes: 120 }), 'any')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: null}), 'any')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 0}), 'any')).toBe(true);
+      expect(isEligible(TestData.createTestTask({estimateMinutes: 120}), 'any')).toBe(true);
     });
   });
 
   describe('getCandidates', () => {
     it('filters tasks by category using isEligible', () => {
       const tasks = [
-        TestData.createTestTask({ estimateMinutes: 3 }),
-        TestData.createTestTask({ estimateMinutes: 15 }),
-        TestData.createTestTask({ estimateMinutes: 45 }),
+        TestData.createTestTask({estimateMinutes: 3}),
+        TestData.createTestTask({estimateMinutes: 15}),
+        TestData.createTestTask({estimateMinutes: 45}),
       ];
 
       expect(getCandidates(tasks, 'quick')).toHaveLength(1);
@@ -140,8 +140,8 @@ describe('picker', () => {
         return arr;
       }) as any);
 
-      const task1 = TestData.createTestTask({ id: 'a' });
-      const task2 = TestData.createTestTask({ id: 'b' });
+      const task1 = TestData.createTestTask({id: 'a'});
+      const task2 = TestData.createTestTask({id: 'b'});
 
       const result = pickRandom([task1, task2]);
       expect(result).toBe(task1);
@@ -156,9 +156,9 @@ describe('picker', () => {
         return arr;
       }) as any);
 
-      const task1 = TestData.createTestTask({ id: 'a' });
-      const task2 = TestData.createTestTask({ id: 'b' });
-      const task3 = TestData.createTestTask({ id: 'c' });
+      const task1 = TestData.createTestTask({id: 'a'});
+      const task2 = TestData.createTestTask({id: 'b'});
+      const task3 = TestData.createTestTask({id: 'c'});
 
       const result = pickRandom([task1, task2, task3], 'a');
       expect(result?.id).not.toBe('a');
@@ -167,12 +167,12 @@ describe('picker', () => {
     });
 
     it('returns excluded task if it is the only one', () => {
-      const task = TestData.createTestTask({ id: 'a' });
+      const task = TestData.createTestTask({id: 'a'});
       expect(pickRandom([task], 'a')).toBe(task);
     });
 
     it('ignores excludeId if only 1 candidate total', () => {
-      const task = TestData.createTestTask({ id: 'a' });
+      const task = TestData.createTestTask({id: 'a'});
       expect(pickRandom([task], 'a')).toBe(task);
     });
 
@@ -183,9 +183,9 @@ describe('picker', () => {
         return arr;
       }) as any);
 
-      const task1 = TestData.createTestTask({ id: 'a' });
-      const task2 = TestData.createTestTask({ id: 'b' });
-      const task3 = TestData.createTestTask({ id: 'c' });
+      const task1 = TestData.createTestTask({id: 'a'});
+      const task2 = TestData.createTestTask({id: 'b'});
+      const task3 = TestData.createTestTask({id: 'c'});
 
       const result = pickRandom([task1, task2, task3]);
       expect(result).toBe(task2); // 100 % 3 = 1

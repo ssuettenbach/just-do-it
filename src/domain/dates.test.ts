@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { todayLocal, isValidDateOnly, getDueStatus, toLocalDate, isValidIsoTimestamp } from '../domain/dates';
+import { describe, expect, it } from 'vitest';
+import { getDueStatus, isValidDateOnly, isValidIsoTimestamp, todayLocal, toLocalDate } from '../domain/dates';
 
 describe('dates', () => {
   describe('todayLocal', () => {

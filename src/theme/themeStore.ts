@@ -12,8 +12,8 @@ type ThemeState = { preference: ThemePreference; resolvedTheme: ResolvedTheme };
 
 let preference: ThemePreference = 'system';
 let resolvedTheme: ResolvedTheme = 'dark';
-let state: ThemeState = { preference, resolvedTheme };
-const SERVER_SNAPSHOT: ThemeState = { preference: 'system', resolvedTheme: 'dark' };
+let state: ThemeState = {preference, resolvedTheme};
+const SERVER_SNAPSHOT: ThemeState = {preference: 'system', resolvedTheme: 'dark'};
 const listeners = new Set<Listener>();
 let initialized = false;
 
@@ -38,7 +38,7 @@ function updateState(newPreference: ThemePreference, newResolved: ResolvedTheme)
   if (newPreference !== preference || newResolved !== resolvedTheme) {
     preference = newPreference;
     resolvedTheme = newResolved;
-    state = { preference, resolvedTheme };
+    state = {preference, resolvedTheme};
   }
 }
 
@@ -157,7 +157,7 @@ function initializeListeners() {
 export function initTheme() {
   preference = readPreference();
   resolvedTheme = resolveTheme(preference);
-  state = { preference, resolvedTheme };
+  state = {preference, resolvedTheme};
   applyTheme(resolvedTheme);
   initializeListeners();
 }

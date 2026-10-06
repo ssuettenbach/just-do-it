@@ -1,13 +1,12 @@
-import { describe, it, expect } from 'vitest';
-import {
-  DEFAULT_OPEN_FILTERS,
-  DEFAULT_HISTORY_FILTERS,
-  filterOpenTasks,
-  filterHistory,
-  hasActiveOpenFilters,
-  hasActiveHistoryFilters,
-} from './filters';
+import { describe, expect, it } from 'vitest';
 import { TestData } from '../test/TestData';
+import {
+  DEFAULT_HISTORY_FILTERS,
+  DEFAULT_OPEN_FILTERS,
+  filterHistory,
+  hasActiveHistoryFilters,
+  hasActiveOpenFilters,
+} from './filters';
 
 describe('filters', () => {
   describe('defaults', () => {
@@ -36,19 +35,19 @@ describe('filters', () => {
     });
 
     it('returns true when text is set', () => {
-      expect(hasActiveOpenFilters({ ...DEFAULT_OPEN_FILTERS, text: 'urgent' })).toBe(true);
+      expect(hasActiveOpenFilters({...DEFAULT_OPEN_FILTERS, text: 'urgent'})).toBe(true);
     });
 
     it('returns true when label is set', () => {
-      expect(hasActiveOpenFilters({ ...DEFAULT_OPEN_FILTERS, label: 'work' })).toBe(true);
+      expect(hasActiveOpenFilters({...DEFAULT_OPEN_FILTERS, label: 'work'})).toBe(true);
     });
 
     it('returns true when duration is not "all"', () => {
-      expect(hasActiveOpenFilters({ ...DEFAULT_OPEN_FILTERS, duration: 'quick' })).toBe(true);
+      expect(hasActiveOpenFilters({...DEFAULT_OPEN_FILTERS, duration: 'quick'})).toBe(true);
     });
 
     it('returns true when due is not "all"', () => {
-      expect(hasActiveOpenFilters({ ...DEFAULT_OPEN_FILTERS, due: 'overdue' })).toBe(true);
+      expect(hasActiveOpenFilters({...DEFAULT_OPEN_FILTERS, due: 'overdue'})).toBe(true);
     });
   });
 
@@ -58,26 +57,26 @@ describe('filters', () => {
     });
 
     it('returns true when text is set', () => {
-      expect(hasActiveHistoryFilters({ ...DEFAULT_HISTORY_FILTERS, text: 'done' })).toBe(true);
+      expect(hasActiveHistoryFilters({...DEFAULT_HISTORY_FILTERS, text: 'done'})).toBe(true);
     });
 
     it('returns true when label is set', () => {
-      expect(hasActiveHistoryFilters({ ...DEFAULT_HISTORY_FILTERS, label: 'work' })).toBe(true);
+      expect(hasActiveHistoryFilters({...DEFAULT_HISTORY_FILTERS, label: 'work'})).toBe(true);
     });
 
     it('returns true when completedFrom is set', () => {
-      expect(hasActiveHistoryFilters({ ...DEFAULT_HISTORY_FILTERS, completedFrom: '2026-10-01' })).toBe(true);
+      expect(hasActiveHistoryFilters({...DEFAULT_HISTORY_FILTERS, completedFrom: '2026-10-01'})).toBe(true);
     });
 
     it('returns true when completedTo is set', () => {
-      expect(hasActiveHistoryFilters({ ...DEFAULT_HISTORY_FILTERS, completedTo: '2026-10-05' })).toBe(true);
+      expect(hasActiveHistoryFilters({...DEFAULT_HISTORY_FILTERS, completedTo: '2026-10-05'})).toBe(true);
     });
   });
 
   describe('filterHistory', () => {
     it('returns only completed tasks', () => {
-      const open = TestData.createTestTask({ status: 'open' });
-      const completed = TestData.createTestTask({ status: 'completed' });
+      const open = TestData.createTestTask({status: 'open'});
+      const completed = TestData.createTestTask({status: 'completed'});
 
       const result = filterHistory([open, completed], DEFAULT_HISTORY_FILTERS);
       expect(result).toHaveLength(1);
@@ -85,19 +84,19 @@ describe('filters', () => {
     });
 
     it('filters by text case-insensitively', () => {
-      const t1 = TestData.createTestTask({ title: 'Finished Report', status: 'completed' });
-      const t2 = TestData.createTestTask({ title: 'Pending Task', status: 'completed' });
+      const t1 = TestData.createTestTask({title: 'Finished Report', status: 'completed'});
+      const t2 = TestData.createTestTask({title: 'Pending Task', status: 'completed'});
 
-      const result = filterHistory([t1, t2], { ...DEFAULT_HISTORY_FILTERS, text: 'report' });
+      const result = filterHistory([t1, t2], {...DEFAULT_HISTORY_FILTERS, text: 'report'});
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe(t1.id);
     });
 
     it('filters by label case-insensitively', () => {
-      const t1 = TestData.createTestTask({ labels: ['Work'], status: 'completed' });
-      const t2 = TestData.createTestTask({ labels: ['Personal'], status: 'completed' });
+      const t1 = TestData.createTestTask({labels: ['Work'], status: 'completed'});
+      const t2 = TestData.createTestTask({labels: ['Personal'], status: 'completed'});
 
-      const result = filterHistory([t1, t2], { ...DEFAULT_HISTORY_FILTERS, label: 'work' });
+      const result = filterHistory([t1, t2], {...DEFAULT_HISTORY_FILTERS, label: 'work'});
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe(t1.id);
     });
@@ -112,7 +111,7 @@ describe('filters', () => {
         completedAt: '2026-10-06T10:00:00.000Z',
       });
 
-      const result = filterHistory([t1, t2], { ...DEFAULT_HISTORY_FILTERS, completedFrom: '2026-10-05' });
+      const result = filterHistory([t1, t2], {...DEFAULT_HISTORY_FILTERS, completedFrom: '2026-10-05'});
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe(t2.id);
     });
@@ -127,7 +126,7 @@ describe('filters', () => {
         completedAt: '2026-10-06T10:00:00.000Z',
       });
 
-      const result = filterHistory([t1, t2], { ...DEFAULT_HISTORY_FILTERS, completedTo: '2026-10-05' });
+      const result = filterHistory([t1, t2], {...DEFAULT_HISTORY_FILTERS, completedTo: '2026-10-05'});
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe(t1.id);
     });

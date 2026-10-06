@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { PageHeader, ConfirmDialog, Button, formatDateTime } from '../components';
-import { useTask, useKnownLabels, useTaskActions } from '../hooks';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Button, ConfirmDialog, formatDateTime, PageHeader } from '../components';
+import { TaskForm } from "../components/tasks";
 import type { TaskInput } from '../domain/types';
-import {TaskForm} from "../components/tasks";
+import { useKnownLabels, useTask, useTaskActions } from '../hooks';
 
 type TaskFormPageProps = {
   mode: 'create' | 'edit';
 };
 
-export default function TaskFormPage({ mode }: TaskFormPageProps) {
-  const { id } = useParams<{ id: string }>();
+export default function TaskFormPage({mode}: TaskFormPageProps) {
+  const {id} = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { task, isLoading } = useTask(mode === 'edit' ? id : undefined);
-  const { labels: knownLabels } = useKnownLabels();
-  const { addTask, updateTask, deleteTask } = useTaskActions();
+  const {task, isLoading} = useTask(mode === 'edit' ? id : undefined);
+  const {labels: knownLabels} = useKnownLabels();
+  const {addTask, updateTask, deleteTask} = useTaskActions();
 
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,7 +70,7 @@ export default function TaskFormPage({ mode }: TaskFormPageProps) {
   if (mode === 'edit' && isLoading) {
     return (
       <div className="p-4 max-w-2xl mx-auto">
-        <PageHeader title="Aufgabe bearbeiten" backTo="/manage" />
+        <PageHeader title="Aufgabe bearbeiten" backTo="/manage"/>
         <p className="text-fg-muted">Wird geladen...</p>
       </div>
     );
@@ -79,7 +79,7 @@ export default function TaskFormPage({ mode }: TaskFormPageProps) {
   if (mode === 'edit' && !task) {
     return (
       <div className="p-4 max-w-2xl mx-auto">
-        <PageHeader title="Aufgabe bearbeiten" backTo="/manage" />
+        <PageHeader title="Aufgabe bearbeiten" backTo="/manage"/>
         <p className="text-fg-muted">Aufgabe nicht gefunden</p>
         <Link to="/manage" className="inline-block mt-4">
           <Button variant="secondary">Zurück zu den Aufgaben</Button>
@@ -92,21 +92,22 @@ export default function TaskFormPage({ mode }: TaskFormPageProps) {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <PageHeader title={title} backTo="/manage" />
+      <PageHeader title={title} backTo="/manage"/>
 
-       {mode === 'edit' && task && task.status === 'completed' && (
+      {mode === 'edit' && task && task.status === 'completed' && (
         <div className="mb-4 p-3 bg-surface rounded-lg border border-border">
           <p className="text-sm text-fg-muted">
             Erledigt am {formatDateTime(task.completedAt || '')}
           </p>
         </div>
-       )}
+      )}
 
-       {error && (
-        <div role="alert" className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-600 rounded-lg text-red-600 dark:text-red-400 text-sm">
+      {error && (
+        <div role="alert"
+             className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-600 rounded-lg text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
-       )}
+      )}
 
       <TaskForm
         mode={mode}

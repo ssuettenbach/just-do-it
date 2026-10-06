@@ -8,10 +8,14 @@ if (typeof window !== 'undefined' && !window.matchMedia) {
       matches: query === '(prefers-color-scheme: dark)' ? false : false,
       media: query,
       onchange: null,
-      addListener: () => {},
-      removeListener: () => {},
-      addEventListener: () => {},
-      removeEventListener: () => {},
+      addListener: () => {
+      },
+      removeListener: () => {
+      },
+      addEventListener: () => {
+      },
+      removeEventListener: () => {
+      },
       dispatchEvent: () => true,
     }),
   });

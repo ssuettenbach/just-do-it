@@ -1,33 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import settingsIcon from '../images/settings.svg';
 import {
+  HistoryFilterPanel,
+  HistoryTaskContent,
+  OpenFilterPanel,
+  OpenTaskContent,
   PageHeader,
   TaskSearchInput,
-  OpenFilterPanel,
-  HistoryFilterPanel,
-  OpenTaskContent,
-  HistoryTaskContent,
 } from '../components';
-import { useOpenTasks, useCompletedTasks, useKnownLabels } from '../hooks';
 import {
-  DEFAULT_OPEN_FILTERS,
   DEFAULT_HISTORY_FILTERS,
-  filterOpenTasks,
+  DEFAULT_OPEN_FILTERS,
   filterHistory,
-  hasActiveOpenFilters,
+  filterOpenTasks,
   hasActiveHistoryFilters,
+  hasActiveOpenFilters,
 } from '../domain/filters';
-import type { OpenTaskFilters, HistoryFilters } from '../domain/types';
+import type { HistoryFilters, OpenTaskFilters } from '../domain/types';
+import { useCompletedTasks, useKnownLabels, useOpenTasks } from '../hooks';
+import settingsIcon from '../images/settings.svg';
 
 type ManagePageProps = {
   tab: 'open' | 'history';
 };
 
-export default function ManagePage({ tab }: ManagePageProps) {
-  const { tasks: openTasks, isLoading: isLoadingOpen } = useOpenTasks();
-  const { tasks: completedTasks, isLoading: isLoadingCompleted } = useCompletedTasks();
-  const { labels: knownLabels } = useKnownLabels();
+export default function ManagePage({tab}: ManagePageProps) {
+  const {tasks: openTasks, isLoading: isLoadingOpen} = useOpenTasks();
+  const {tasks: completedTasks, isLoading: isLoadingCompleted} = useCompletedTasks();
+  const {labels: knownLabels} = useKnownLabels();
 
   const [openFilters, setOpenFilters] = useState<OpenTaskFilters>(DEFAULT_OPEN_FILTERS);
   const [historyFilters, setHistoryFilters] = useState<HistoryFilters>(DEFAULT_HISTORY_FILTERS);
@@ -43,11 +43,11 @@ export default function ManagePage({ tab }: ManagePageProps) {
   const clearHistoryFilters = () => setHistoryFilters(DEFAULT_HISTORY_FILTERS);
 
   const handleOpenFilterChange = (filter: Partial<OpenTaskFilters>) => {
-    setOpenFilters((prev) => ({ ...prev, ...filter }));
+    setOpenFilters((prev) => ({...prev, ...filter}));
   };
 
   const handleHistoryFilterChange = (filter: Partial<HistoryFilters>) => {
-    setHistoryFilters((prev) => ({ ...prev, ...filter }));
+    setHistoryFilters((prev) => ({...prev, ...filter}));
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function ManagePage({ tab }: ManagePageProps) {
         title="Aufgaben verwalten"
         actions={
           <Link to="/settings" className="text-fg-soft hover:text-fg transition-colors">
-            <img src={settingsIcon} alt="Einstellungen" className="size-6" />
+            <img src={settingsIcon} alt="Einstellungen" className="size-6"/>
           </Link>
         }
       />
@@ -97,13 +97,13 @@ export default function ManagePage({ tab }: ManagePageProps) {
         <TaskSearchInput
           id="open-text"
           value={openFilters.text}
-          onChange={(text) => handleOpenFilterChange({ text })}
+          onChange={(text) => handleOpenFilterChange({text})}
         />
       ) : (
         <TaskSearchInput
           id="history-text"
           value={historyFilters.text}
-          onChange={(text) => handleHistoryFilterChange({ text })}
+          onChange={(text) => handleHistoryFilterChange({text})}
         />
       )}
 
@@ -133,7 +133,8 @@ export default function ManagePage({ tab }: ManagePageProps) {
       </details>
 
       {error && (
-        <div role="alert" className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-600 rounded-lg text-red-600 dark:text-red-400 text-sm">
+        <div role="alert"
+             className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-600 rounded-lg text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
       )}

@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { normalizeLabels, collectKnownLabels } from './labels';
+import { describe, expect, it } from 'vitest';
 import { TestData } from '../test/TestData';
+import { collectKnownLabels, normalizeLabels } from './labels';
 
 describe('labels', () => {
   describe('normalizeLabels', () => {
@@ -33,8 +33,8 @@ describe('labels', () => {
 
   describe('collectKnownLabels', () => {
     it('collects all unique labels from tasks', () => {
-      const t1 = TestData.createTestTask({ labels: ['work', 'urgent'] });
-      const t2 = TestData.createTestTask({ labels: ['personal', 'work'] });
+      const t1 = TestData.createTestTask({labels: ['work', 'urgent']});
+      const t2 = TestData.createTestTask({labels: ['personal', 'work']});
 
       const result = collectKnownLabels([t1, t2]);
       expect(result).toContain('work');
@@ -43,23 +43,23 @@ describe('labels', () => {
     });
 
     it('deduplicates case-insensitively, preserving first casing', () => {
-      const t1 = TestData.createTestTask({ labels: ['Work'] });
-      const t2 = TestData.createTestTask({ labels: ['work', 'WORK'] });
+      const t1 = TestData.createTestTask({labels: ['Work']});
+      const t2 = TestData.createTestTask({labels: ['work', 'WORK']});
 
       const result = collectKnownLabels([t1, t2]);
       expect(result).toEqual(['Work']);
     });
 
     it('sorts case-insensitively', () => {
-      const t1 = TestData.createTestTask({ labels: ['Zebra', 'apple', 'Mango'] });
+      const t1 = TestData.createTestTask({labels: ['Zebra', 'apple', 'Mango']});
 
       const result = collectKnownLabels([t1]);
       expect(result).toEqual(['apple', 'Mango', 'Zebra']);
     });
 
     it('handles tasks without labels', () => {
-      const t1 = TestData.createTestTask({ labels: ['work'] });
-      const t2 = TestData.createTestTask({ labels: [] });
+      const t1 = TestData.createTestTask({labels: ['work']});
+      const t2 = TestData.createTestTask({labels: []});
 
       const result = collectKnownLabels([t1, t2]);
       expect(result).toEqual(['work']);
@@ -71,8 +71,8 @@ describe('labels', () => {
 
     it('handles tasks with undefined labels gracefully', () => {
       const tasks = [
-        TestData.createTestTask({ labels: ['work'] }),
-        { ...TestData.createTestTask(), labels: undefined } as any,
+        TestData.createTestTask({labels: ['work']}),
+        {...TestData.createTestTask(), labels: undefined} as any,
       ];
 
       const result = collectKnownLabels(tasks);

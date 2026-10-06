@@ -1,7 +1,6 @@
-import type { Task, TaskInput } from './types';
-import { normalizeLabels } from './labels';
 import { isValidDateOnly } from './dates';
-import { todayLocal } from './dates';
+import { normalizeLabels } from './labels';
+import type { Task, TaskInput } from './types';
 
 export function validateTaskInput(input: TaskInput): Partial<Record<'title' | 'estimateMinutes' | 'dueDate', string>> {
   const errors: Partial<Record<'title' | 'estimateMinutes' | 'dueDate', string>> = {};

@@ -1,6 +1,6 @@
-import type { Task } from '../domain/types';
 import { isValidDateOnly, isValidIsoTimestamp, todayLocal } from '../domain/dates';
 import { normalizeLabels } from '../domain/labels';
+import type { Task } from '../domain/types';
 
 export const BACKUP_FORMAT = 'just-do-it-backup' as const;
 export const BACKUP_VERSION = 1;
@@ -96,7 +96,7 @@ export function createBackup(tasks: Task[], now: Date = new Date()): BackupDocum
     format: BACKUP_FORMAT,
     version: BACKUP_VERSION,
     exportedAt: now.toISOString(),
-    tasks: tasks.map((t) => ({ ...t })),
+    tasks: tasks.map((t) => ({...t})),
   };
 }
 
@@ -115,15 +115,15 @@ export function parseAndValidateBackup(text: string): ValidationResult {
   try {
     doc = JSON.parse(text);
   } catch (e) {
-    return { ok: false, errors: ['Ungültiges JSON'] };
+    return {ok: false, errors: ['Ungültiges JSON']};
   }
 
   if (!isRecord(doc)) {
-    return { ok: false, errors: ['Die Wurzel muss ein Objekt sein'] };
+    return {ok: false, errors: ['Die Wurzel muss ein Objekt sein']};
   }
 
   if (doc.format !== BACKUP_FORMAT) {
-    return { ok: false, errors: [`Ungültiges Format. Erwartet '${BACKUP_FORMAT}', erhalten '${doc.format}'`] };
+    return {ok: false, errors: [`Ungültiges Format. Erwartet '${BACKUP_FORMAT}', erhalten '${doc.format}'`]};
   }
 
   if (doc.version !== BACKUP_VERSION) {
@@ -134,7 +134,7 @@ export function parseAndValidateBackup(text: string): ValidationResult {
   }
 
   if (!Array.isArray(doc.tasks)) {
-    return { ok: false, errors: ['tasks muss ein Array sein'] };
+    return {ok: false, errors: ['tasks muss ein Array sein']};
   }
 
   const seenIds = new Set<string>();
@@ -150,7 +150,7 @@ export function parseAndValidateBackup(text: string): ValidationResult {
     if (allErrors.length > MAX_ERRORS) {
       sliced.push(`... und ${allErrors.length - MAX_ERRORS} weitere Fehler`);
     }
-    return { ok: false, errors: sliced };
+    return {ok: false, errors: sliced};
   }
 
   const validatedTasks: Task[] = doc.tasks.map((raw: unknown) => {
@@ -169,5 +169,5 @@ export function parseAndValidateBackup(text: string): ValidationResult {
     };
   });
 
-  return { ok: true, tasks: validatedTasks };
+  return {ok: true, tasks: validatedTasks};
 }

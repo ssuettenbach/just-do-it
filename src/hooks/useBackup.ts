@@ -1,8 +1,7 @@
-import type { Task } from '../domain/types';
-import type { ValidationResult } from '../backup/backup';
-import { exportBackup, replaceAllTasks, mergeTasks } from '../backup/backupService';
-import { downloadTextFile } from '../backup/download';
 import { parseAndValidateBackup } from '../backup/backup';
+import { exportBackup, mergeTasks, replaceAllTasks } from '../backup/backupService';
+import { downloadTextFile } from '../backup/download';
+import type { Task } from '../domain/types';
 
 export function useBackup() {
   return {

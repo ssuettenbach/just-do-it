@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef, useId, FormEvent } from 'react';
+import { FormEvent, useEffect, useId, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Task, TaskInput } from '../../domain/types';
-import { validateTaskInput } from '../../domain/taskFactory';
 import { normalizeLabels } from '../../domain/labels';
-import {LabelInput} from "./LabelInput";
-import {Button} from "../Button";
+import { validateTaskInput } from '../../domain/taskFactory';
+import type { Task, TaskInput } from '../../domain/types';
+import { Button } from "../Button";
+import { LabelInput } from "./LabelInput";
 
 const ESTIMATE_PRESETS = [5, 15, 30, 45];
 const DEFAULT_ESTIMATE = ESTIMATE_PRESETS[0];
@@ -17,7 +17,7 @@ interface TaskFormProps {
   isSubmitting?: boolean;
 }
 
-export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = false }: TaskFormProps) {
+export function TaskForm({mode, task, knownLabels, onSubmit, isSubmitting = false}: TaskFormProps) {
   const navigate = useNavigate();
   const titleId = useId();
   const estimateId = useId();
@@ -117,7 +117,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-       <div>
+      <div>
         <label htmlFor={titleId} className="block text-sm font-medium text-fg-soft mb-1">
           Titel
         </label>
@@ -140,7 +140,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
         )}
       </div>
 
-       <div>
+      <div>
         <label htmlFor={estimateId} className="block text-sm font-medium text-fg-soft mb-1">
           Schätzung (Minuten)
         </label>
@@ -171,7 +171,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
         )}
       </div>
 
-       <div>
+      <div>
         <label htmlFor={dueDateId} className="block text-sm font-medium text-fg-soft mb-1">
           Fälligkeitsdatum
         </label>
@@ -192,7 +192,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
         )}
       </div>
 
-       <div>
+      <div>
         <label htmlFor={notesId} className="block text-sm font-medium text-fg-soft mb-1">
           Notizen
         </label>
@@ -206,7 +206,7 @@ export function TaskForm({ mode, task, knownLabels, onSubmit, isSubmitting = fal
       </div>
 
       <div>
-        <LabelInput labels={input.labels} onChange={handleLabelsChange} knownLabels={knownLabels} />
+        <LabelInput labels={input.labels} onChange={handleLabelsChange} knownLabels={knownLabels}/>
       </div>
 
       <div className="flex gap-3 pt-4">

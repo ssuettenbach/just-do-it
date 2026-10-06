@@ -1,18 +1,18 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { TestData } from '../test/TestData';
 import { db } from './database';
 import {
   addTask,
-  updateTask,
   completeTaskById,
-  reopenTaskById,
   deleteTask,
-  getTask,
-  getOpenTasks,
-  getCompletedTasks,
   getAllTasks,
+  getCompletedTasks,
+  getOpenTasks,
+  getTask,
   pickTask,
+  reopenTaskById,
+  updateTask,
 } from './taskRepository';
-import { TestData } from '../test/TestData';
 
 describe('taskRepository', () => {
   beforeEach(async () => {
@@ -21,7 +21,7 @@ describe('taskRepository', () => {
 
   describe('addTask', () => {
     it('adds task to database and returns it', async () => {
-      const input = TestData.createTestTaskInput({ title: 'New Task' });
+      const input = TestData.createTestTaskInput({title: 'New Task'});
       const task = await addTask(input);
 
       expect(task.id).toBeTruthy();
@@ -30,12 +30,12 @@ describe('taskRepository', () => {
     });
 
     it('throws on invalid input', async () => {
-      const input = TestData.createTestTaskInput({ title: '' });
+      const input = TestData.createTestTaskInput({title: ''});
       await expect(addTask(input)).rejects.toThrow();
     });
 
     it('normalizes labels on add', async () => {
-      const input = TestData.createTestTaskInput({ labels: ['work', 'Work', 'WORK'] });
+      const input = TestData.createTestTaskInput({labels: ['work', 'Work', 'WORK']});
       const task = await addTask(input);
       expect(task.labels).toEqual(['work']);
     });
@@ -43,7 +43,7 @@ describe('taskRepository', () => {
 
   describe('getTask', () => {
     it('returns task by id', async () => {
-      const input = TestData.createTestTaskInput({ title: 'Test' });
+      const input = TestData.createTestTaskInput({title: 'Test'});
       const added = await addTask(input);
       const retrieved = await getTask(added.id);
 
@@ -60,10 +60,10 @@ describe('taskRepository', () => {
 
   describe('updateTask', () => {
     it('updates task and returns updated version', async () => {
-      const input = TestData.createTestTaskInput({ title: 'Original' });
+      const input = TestData.createTestTaskInput({title: 'Original'});
       const task = await addTask(input);
 
-      const updatedInput = TestData.createTestTaskInput({ title: 'Updated' });
+      const updatedInput = TestData.createTestTaskInput({title: 'Updated'});
       const updated = await updateTask(task.id, updatedInput);
 
       expect(updated.id).toBe(task.id);
@@ -76,17 +76,17 @@ describe('taskRepository', () => {
     });
 
     it('throws on invalid input', async () => {
-      const input = TestData.createTestTaskInput({ title: 'Valid' });
+      const input = TestData.createTestTaskInput({title: 'Valid'});
       const task = await addTask(input);
 
-      const invalidInput = TestData.createTestTaskInput({ title: '' });
+      const invalidInput = TestData.createTestTaskInput({title: ''});
       await expect(updateTask(task.id, invalidInput)).rejects.toThrow();
     });
   });
 
   describe('completeTaskById', () => {
     it('completes task and returns updated version', async () => {
-      const task = await addTask(TestData.createTestTaskInput({ title: 'To Complete' }));
+      const task = await addTask(TestData.createTestTaskInput({title: 'To Complete'}));
       const completed = await completeTaskById(task.id);
 
       expect(completed.id).toBe(task.id);
@@ -150,10 +150,10 @@ describe('taskRepository', () => {
 
   describe('getOpenTasks', () => {
     it('returns only open tasks', async () => {
-      const open1 = await addTask(TestData.createTestTaskInput({ title: 'Open 1' }));
-      const open2 = await addTask(TestData.createTestTaskInput({ title: 'Open 2' }));
+      const open1 = await addTask(TestData.createTestTaskInput({title: 'Open 1'}));
+      const open2 = await addTask(TestData.createTestTaskInput({title: 'Open 2'}));
       await completeTaskById(open2.id);
-      const open3 = await addTask(TestData.createTestTaskInput({ title: 'Open 3' }));
+      const open3 = await addTask(TestData.createTestTaskInput({title: 'Open 3'}));
 
       const result = await getOpenTasks();
       expect(result).toHaveLength(2);
@@ -172,8 +172,8 @@ describe('taskRepository', () => {
 
   describe('getCompletedTasks', () => {
     it('returns only completed tasks', async () => {
-      const t1 = await addTask(TestData.createTestTaskInput({ title: 'Task 1' }));
-      const t2 = await addTask(TestData.createTestTaskInput({ title: 'Task 2' }));
+      const t1 = await addTask(TestData.createTestTaskInput({title: 'Task 1'}));
+      const t2 = await addTask(TestData.createTestTaskInput({title: 'Task 2'}));
       await completeTaskById(t1.id);
 
       const result = await getCompletedTasks();
@@ -208,31 +208,31 @@ describe('taskRepository', () => {
 
   describe('pickTask', () => {
     it('returns null if no eligible candidates', async () => {
-      const task = await addTask(TestData.createTestTaskInput({ estimateMinutes: null }));
+      const task = await addTask(TestData.createTestTaskInput({estimateMinutes: null}));
       const result = await pickTask('quick');
 
       expect(result).toBeNull();
     });
 
     it('returns eligible task for quick category', async () => {
-      const quick = await addTask(TestData.createTestTaskInput({ estimateMinutes: 3 }));
-      const big = await addTask(TestData.createTestTaskInput({ estimateMinutes: 45 }));
+      const quick = await addTask(TestData.createTestTaskInput({estimateMinutes: 3}));
+      const big = await addTask(TestData.createTestTaskInput({estimateMinutes: 45}));
 
       const result = await pickTask('quick');
       expect(result?.id).toBe(quick.id);
     });
 
     it('returns eligible task for big category', async () => {
-      const quick = await addTask(TestData.createTestTaskInput({ estimateMinutes: 3 }));
-      const big = await addTask(TestData.createTestTaskInput({ estimateMinutes: 45 }));
+      const quick = await addTask(TestData.createTestTaskInput({estimateMinutes: 3}));
+      const big = await addTask(TestData.createTestTaskInput({estimateMinutes: 45}));
 
       const result = await pickTask('big');
       expect(result?.id).toBe(big.id);
     });
 
     it('returns any open task for any category', async () => {
-      const t1 = await addTask(TestData.createTestTaskInput({ estimateMinutes: null }));
-      const t2 = await addTask(TestData.createTestTaskInput({ estimateMinutes: 50 }));
+      const t1 = await addTask(TestData.createTestTaskInput({estimateMinutes: null}));
+      const t2 = await addTask(TestData.createTestTaskInput({estimateMinutes: 50}));
 
       const result = await pickTask('any');
       expect(result).not.toBeNull();
@@ -240,22 +240,22 @@ describe('taskRepository', () => {
     });
 
     it('excludes specific id if 2+ candidates available', async () => {
-      const t1 = await addTask(TestData.createTestTaskInput({ estimateMinutes: 3 }));
-      const t2 = await addTask(TestData.createTestTaskInput({ estimateMinutes: 3 }));
+      const t1 = await addTask(TestData.createTestTaskInput({estimateMinutes: 3}));
+      const t2 = await addTask(TestData.createTestTaskInput({estimateMinutes: 3}));
 
       const result = await pickTask('quick', t1.id);
       expect(result?.id).not.toBe(t1.id);
     });
 
     it('returns excluded task if only 1 candidate', async () => {
-      const task = await addTask(TestData.createTestTaskInput({ estimateMinutes: 3 }));
+      const task = await addTask(TestData.createTestTaskInput({estimateMinutes: 3}));
 
       const result = await pickTask('quick', task.id);
       expect(result?.id).toBe(task.id);
     });
 
     it('excludes completed tasks', async () => {
-      const t1 = await addTask(TestData.createTestTaskInput({ estimateMinutes: 3 }));
+      const t1 = await addTask(TestData.createTestTaskInput({estimateMinutes: 3}));
       await completeTaskById(t1.id);
 
       const result = await pickTask('quick');

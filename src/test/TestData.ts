@@ -1,5 +1,5 @@
-import type { Task, TaskInput, OpenTaskFilters, HistoryFilters } from '../domain/types';
 import type { BackupDocument } from '../backup/backup';
+import type { HistoryFilters, OpenTaskFilters, Task, TaskInput } from '../domain/types';
 
 export class TestData {
   static createTestTask(overrides: Partial<Task> = {}): Task {

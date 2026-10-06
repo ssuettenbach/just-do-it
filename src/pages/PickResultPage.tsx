@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams, useNavigate, Navigate, Link } from 'react-router-dom';
-import { useOpenTasks } from '../hooks/useOpenTasks';
-import { useTaskActions } from '../hooks/useTaskActions';
-import { getCandidates, pickRandom } from '../domain/picker';
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { PickedTaskCard } from '../components/dashboard/PickedTaskCard';
+import { getCandidates, pickRandom } from '../domain/picker';
+import { useOpenTasks } from '../hooks/useOpenTasks';
+import { useTaskActions } from '../hooks/useTaskActions';
 
 type ValidCategory = 'quick' | 'any' | 'big';
 
@@ -12,11 +12,11 @@ const isValidCategory = (cat: string | undefined): cat is ValidCategory =>
   cat === 'quick' || cat === 'any' || cat === 'big';
 
 export default function PickResultPage() {
-  const { category } = useParams<{ category: string }>();
+  const {category} = useParams<{ category: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { tasks, isLoading } = useOpenTasks();
-  const { completeTask } = useTaskActions();
+  const {tasks, isLoading} = useOpenTasks();
+  const {completeTask} = useTaskActions();
 
   const [isCompleting, setIsCompleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,23 +31,23 @@ export default function PickResultPage() {
       if (!pickedTaskId) {
         const newTask = pickRandom(candidates);
         if (newTask) {
-          setSearchParams({ task: newTask.id }, { replace: true });
+          setSearchParams({task: newTask.id}, {replace: true});
         }
       } else if (!candidates.some((t) => t.id === pickedTaskId)) {
         if (candidates.length > 0) {
           const newTask = pickRandom(candidates);
           if (newTask) {
-            setSearchParams({ task: newTask.id }, { replace: true });
+            setSearchParams({task: newTask.id}, {replace: true});
           }
         } else {
-          setSearchParams({}, { replace: true });
+          setSearchParams({}, {replace: true});
         }
       }
     }
   }, [isLoading, category, pickedTaskId, candidateIds, setSearchParams]);
 
   if (!category || !isValidCategory(category)) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" replace/>;
   }
 
   if (isLoading) {
@@ -88,7 +88,7 @@ export default function PickResultPage() {
   const handlePickAnother = () => {
     const newTask = pickRandom(candidates, pickedTask.id);
     if (newTask) {
-      setSearchParams({ task: newTask.id });
+      setSearchParams({task: newTask.id});
     }
   };
 
@@ -127,10 +127,10 @@ export default function PickResultPage() {
                 Dies ist die einzige passende Aufgabe.
               </span>
             )}
-             <Link
-               to={`/tasks/${pickedTask.id}`}
-               className="min-h-11 inline-flex items-center justify-center px-4 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus hover:bg-surface text-fg-soft hover:text-fg"
-             >
+            <Link
+              to={`/tasks/${pickedTask.id}`}
+              className="min-h-11 inline-flex items-center justify-center px-4 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus hover:bg-surface text-fg-soft hover:text-fg"
+            >
               Anzeigen/bearbeiten
             </Link>
           </>

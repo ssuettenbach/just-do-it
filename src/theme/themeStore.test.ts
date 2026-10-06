@@ -1,13 +1,13 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  initTheme,
   getPreference,
   getResolvedTheme,
+  getSnapshot,
+  initTheme,
   setPreference,
   subscribe,
-  getSnapshot,
-  THEME_STORAGE_KEY,
   THEME_COLORS,
+  THEME_STORAGE_KEY,
 } from './themeStore';
 
 describe('themeStore', () => {
@@ -240,7 +240,7 @@ describe('themeStore', () => {
 
       window.dispatchEvent(event);
       expect(listener).toHaveBeenCalled();
-      
+
       unsubscribe();
     });
 
@@ -255,7 +255,7 @@ describe('themeStore', () => {
 
       window.dispatchEvent(event);
       expect(listener).not.toHaveBeenCalled();
-      
+
       unsubscribe();
     });
   });

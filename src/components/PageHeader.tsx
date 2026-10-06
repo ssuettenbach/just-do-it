@@ -7,15 +7,15 @@ interface PageHeaderProps {
   backTo?: string;
 }
 
-export function PageHeader({ title, actions, backTo }: PageHeaderProps) {
+export function PageHeader({title, actions, backTo}: PageHeaderProps) {
   return (
     <header className="flex items-center gap-6 mb-6">
-       {backTo ? (
-          <Link
-            to={backTo}
-            aria-label="Zurück"
-            className="text-fg-muted hover:text-fg transition-colors"
-          >
+      {backTo ? (
+        <Link
+          to={backTo}
+          aria-label="Zurück"
+          className="text-fg-muted hover:text-fg transition-colors"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -27,13 +27,13 @@ export function PageHeader({ title, actions, backTo }: PageHeaderProps) {
             className="w-6 h-6"
             aria-hidden="true"
           >
-            <path d="M19 12H5M12 19l-7-7 7-7" />
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
         </Link>
       ) : (
-        <div aria-hidden="true" className="w-6" />
+        <div aria-hidden="true" className="w-6"/>
       )}
-       <h1 className="text-xl font-semibold text-fg truncate">{title}</h1>
+      <h1 className="text-xl font-semibold text-fg truncate">{title}</h1>
       {actions && <div className="absolute top-4 right-4">{actions}</div>}
     </header>
   );

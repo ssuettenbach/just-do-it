@@ -1,8 +1,7 @@
-import type { Task } from '../domain/types';
 import { db } from '../db/database';
 import { getAllTasks } from '../db/taskRepository';
-import { createBackup, serializeBackup, backupFileName, parseAndValidateBackup } from './backup';
-import { downloadTextFile } from './download';
+import type { Task } from '../domain/types';
+import { backupFileName, createBackup, serializeBackup } from './backup';
 
 export async function exportBackup(): Promise<{ fileName: string; json: string }> {
   const tasks = await getAllTasks();
@@ -10,7 +9,7 @@ export async function exportBackup(): Promise<{ fileName: string; json: string }
   const json = serializeBackup(doc);
   const fileName = backupFileName();
 
-  return { fileName, json };
+  return {fileName, json};
 }
 
 export async function replaceAllTasks(tasks: Task[]): Promise<number> {
@@ -33,6 +32,6 @@ export async function mergeTasks(tasks: Task[]): Promise<{ imported: number; ski
       await db.tasks.bulkAdd(toImport);
     }
 
-    return { imported: toImport.length, skipped };
+    return {imported: toImport.length, skipped};
   });
 }

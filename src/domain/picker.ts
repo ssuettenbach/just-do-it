@@ -1,4 +1,4 @@
-import type { Task, PickCategory } from './types';
+import type { PickCategory, Task } from './types';
 
 export const QUICK_MAX_MINUTES = 5;
 export const BIG_MIN_MINUTES = 30;

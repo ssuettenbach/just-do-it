@@ -1,11 +1,11 @@
 import {
   addTask as addTaskRepo,
-  updateTask as updateTaskRepo,
   completeTaskById as completeTaskByIdRepo,
-  reopenTaskById as reopenTaskByIdRepo,
   deleteTask as deleteTaskRepo,
+  reopenTaskById as reopenTaskByIdRepo,
+  updateTask as updateTaskRepo,
 } from '../db/taskRepository';
-import type { Task, TaskInput } from '../domain/types';
+import type { TaskInput } from '../domain/types';
 
 export function useTaskActions() {
   return {

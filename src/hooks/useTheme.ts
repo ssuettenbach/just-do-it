@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react';
-import { getSnapshot, getServerSnapshot, subscribe, setPreference, getResolvedTheme, type ThemePreference, type ResolvedTheme } from '../theme/themeStore';
+import { getResolvedTheme, getServerSnapshot, getSnapshot, setPreference, subscribe } from '../theme/themeStore';
 
 export function useTheme() {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

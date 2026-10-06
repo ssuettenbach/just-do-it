@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import resetIcon from '../../images/reset.svg';
-import plusIcon from '../../images/plus.svg';
-import { EmptyState } from '../EmptyState';
-import { OpenTaskItem } from './OpenTaskItem';
 import type { Task } from '../../domain/types';
+import plusIcon from '../../images/plus.svg';
+import resetIcon from '../../images/reset.svg';
+import { Button } from '../Button';
+import { EmptyState } from '../EmptyState';
+import { Icon } from '../Icon';
+import { OpenTaskItem } from './OpenTaskItem';
 
 interface OpenTaskContentProps {
   tasks: Task[];
@@ -17,13 +17,13 @@ interface OpenTaskContentProps {
 }
 
 export function OpenTaskContent({
-  tasks,
-  filteredTasks,
-  isLoading,
-  activeFilters,
-  onClearFilters,
-  onActionError,
-}: OpenTaskContentProps) {
+                                  tasks,
+                                  filteredTasks,
+                                  isLoading,
+                                  activeFilters,
+                                  onClearFilters,
+                                  onActionError,
+                                }: OpenTaskContentProps) {
   if (isLoading) {
     return <p className="text-fg-muted">Wird geladen...</p>;
   }
@@ -33,7 +33,7 @@ export function OpenTaskContent({
       <EmptyState title="Keine offenen Aufgaben">
         <Link to="/tasks/new">
           <Button variant="primary">
-            <Icon src={plusIcon} />
+            <Icon src={plusIcon}/>
             Aufgabe hinzufügen
           </Button>
         </Link>
@@ -45,12 +45,12 @@ export function OpenTaskContent({
     return (
       <EmptyState title="Keine Aufgaben entsprechen deinen Filtern">
         <Button variant="secondary" onClick={onClearFilters}>
-          <Icon src={resetIcon} />
+          <Icon src={resetIcon}/>
           Filter zurücksetzen
         </Button>
         <Link to="/tasks/new">
           <Button variant="primary">
-            <Icon src={plusIcon} />
+            <Icon src={plusIcon}/>
             Aufgabe hinzufügen
           </Button>
         </Link>
@@ -61,7 +61,7 @@ export function OpenTaskContent({
   return (
     <ul className="space-y-3">
       {filteredTasks.map((task) => (
-        <OpenTaskItem key={task.id} task={task} onActionError={onActionError} />
+        <OpenTaskItem key={task.id} task={task} onActionError={onActionError}/>
       ))}
     </ul>
   );

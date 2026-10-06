@@ -1,8 +1,8 @@
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import resetIcon from '../../images/reset.svg';
 import { todayLocal } from '../../domain/dates';
 import type { OpenTaskFilters } from '../../domain/types';
+import resetIcon from '../../images/reset.svg';
+import { Button } from '../Button';
+import { Icon } from '../Icon';
 
 interface OpenFilterPanelProps {
   filters: OpenTaskFilters;
@@ -12,7 +12,7 @@ interface OpenFilterPanelProps {
   hasActiveFilters: boolean;
 }
 
-export function OpenFilterPanel({ filters, knownLabels, onChange, onClear, hasActiveFilters }: OpenFilterPanelProps) {
+export function OpenFilterPanel({filters, knownLabels, onChange, onClear, hasActiveFilters}: OpenFilterPanelProps) {
   const today = todayLocal();
 
   return (
@@ -24,7 +24,7 @@ export function OpenFilterPanel({ filters, knownLabels, onChange, onClear, hasAc
         <select
           id="open-label"
           value={filters.label || ''}
-          onChange={(e) => onChange({ label: e.target.value || null })}
+          onChange={(e) => onChange({label: e.target.value || null})}
           className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="">Alle Kennzeichnungen</option>
@@ -43,7 +43,7 @@ export function OpenFilterPanel({ filters, knownLabels, onChange, onClear, hasAc
         <select
           id="open-duration"
           value={filters.duration}
-          onChange={(e) => onChange({ duration: e.target.value as OpenTaskFilters['duration'] })}
+          onChange={(e) => onChange({duration: e.target.value as OpenTaskFilters['duration']})}
           className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="all">Alle</option>
@@ -61,7 +61,7 @@ export function OpenFilterPanel({ filters, knownLabels, onChange, onClear, hasAc
         <select
           id="open-due"
           value={filters.due}
-          onChange={(e) => onChange({ due: e.target.value as OpenTaskFilters['due'] })}
+          onChange={(e) => onChange({due: e.target.value as OpenTaskFilters['due']})}
           className="w-full rounded-lg bg-surface-muted border border-border-strong px-3 py-2 text-fg focus:outline-none focus:ring-2 focus:ring-focus"
         >
           <option value="all">Alle</option>
@@ -74,7 +74,7 @@ export function OpenFilterPanel({ filters, knownLabels, onChange, onClear, hasAc
 
       {hasActiveFilters && (
         <Button variant="ghost" onClick={onClear} className="w-full">
-          <Icon src={resetIcon} />
+          <Icon src={resetIcon}/>
           Filter zurücksetzen
         </Button>
       )}
