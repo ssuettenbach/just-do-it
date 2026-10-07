@@ -65,11 +65,12 @@ export function OpenTaskItem({task, onActionError}: OpenTaskItemProps) {
           <Button
             variant="danger"
             size="md"
+            className="max-[440px]:size-11 max-[440px]:p-0"
             onClick={() => setShowDeleteDialog(true)}
             aria-label={`${task.title} löschen`}
           >
             <Icon src={trashIcon}/>
-            Löschen
+            <span className="max-[440px]:hidden">Löschen</span>
           </Button>
         </div>
       </div>
